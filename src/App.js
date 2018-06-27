@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from "react-router-dom"
 
+import News from "./News";
+import About from "./About"
 class App extends Component {
-state = {
-  
-}
-
   render() {
     return (
-      <div>
-        <header>
-          <h1>Northcoders News</h1>
-        </header>
-      </div>
+      <BrowserRouter>
+        <div>
+          <News />
+          <footer>
+            <About />
+          </footer>
+        </div>
+      </BrowserRouter>
     );
   }
 }
