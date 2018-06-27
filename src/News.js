@@ -13,7 +13,7 @@ class News extends Component {
           <NavBar />
         </header>
         <Route exact path="/" component={ArticleList} />
-        <Route exact path="/posts/:postId" component={ArticleView} /> 
+        <Route exact path="/articles/:article_id" component={ArticleView} /> 
       </div>
     
     );

@@ -14,16 +14,41 @@ class ArticleList extends Component {
         .then(articles => {
             console.log(articles, 'did mount')
             this.setState({
-                articles: articles.articles, 
+                articles: articles, 
                 loading: false
             })
         })
     }
     render() {
-      return (
-        <div>
-        </div>
-      );
+        const {loading, articles} = this.state
+        let hottest = function (a, b) {
+            if(a.comment_count > b.comment_count){
+                return -1
+            }
+            if(a.comment_count < b.comment_count){
+                return 1
+            }
+            return 0
+        }
+        console.log(this.state.articles)
+        return (
+            <div>
+                {
+                    loading ? <p>Loading...</p> : articles
+                    .sort(hottest)
+                    .map(article => {
+                        return (
+                            <div key={article._id}>
+                            <Link to={`/articles/${article._id}`}>
+                                <h3>{article.title}</h3>
+                            </Link>
+                            <p>comments: {article.comment_count} votes: {article.votes}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        );
     }
   }
   
