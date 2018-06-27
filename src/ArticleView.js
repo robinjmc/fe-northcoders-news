@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-class Articles extends Component {
+class ArticleView extends Component {
+
     render() {
       return (
         <div>
@@ -10,4 +11,5 @@ class Articles extends Component {
     }
   }
   
-  export default Articles;
+  export default ArticleView;
+  

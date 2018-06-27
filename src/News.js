@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 
 import NavBar from "./NavBar"
-import Articles from "./Articles"
-import Article from "./Article"
+import ArticleList from "./ArticleList"
+import ArticleView from "./ArticleView"
 class News extends Component {
   render() {
     return (
@@ -12,8 +12,8 @@ class News extends Component {
           <img src="https://northcoders.com/images/logos/learn_to_code_manchester_original_second.png" alt="Northcoders"/>
           <NavBar />
         </header>
-        <Route exact path="/" component={Articles} />
-        <Route exact path="/posts/:postId" component={Article} /> 
+        <Route exact path="/" component={ArticleList} />
+        <Route exact path="/posts/:postId" component={ArticleView} /> 
       </div>
     
     );
