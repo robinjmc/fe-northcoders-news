@@ -24,6 +24,13 @@ componentDidMount() {
       const { loading, article } = this.state;
       return (
         <div>
+          { loading ? <p>Loading...</p> :
+            <div>
+              <h3>{article.title}</h3>
+              <p>{article.body}</p>
+            </div>
+          }
+        <Link to="/">return to feed</Link>  
         </div>
       );
     }
