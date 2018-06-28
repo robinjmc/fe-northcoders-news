@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 
 import NavBar from "./NavBar";
 import ArticleView from "./ArticleView";
+import ArticleList from "./ArticleList"
 import Landing from './Landing';
 class News extends Component {
   render() {
@@ -14,6 +15,7 @@ class News extends Component {
         </header>
        
         <Route exact path="/" component={Landing} />
+        <Route exact path="/:topic_id" component={ArticleList} />
         <Route exact path="/articles/:article_id" component={ArticleView} /> 
         
       </div>
