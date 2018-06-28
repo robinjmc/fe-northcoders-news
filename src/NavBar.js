@@ -1,16 +1,43 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
-    render() {
-      return (
-        <div>
-            <h1>Football</h1>
-            <h1>Coding</h1>
-            <h1>Cooking</h1>
-        </div>
-      );
-    }
+  state = {
+    topics: null,
+    loading: true
   }
-  
-  export default NavBar;
-  
+
+  componentDidMount() {
+    fetch('https://robin-pt-nc-news.herokuapp.com/api/topics')
+      .then(res => {
+        return res.json()
+      })
+      .then(topics => {
+        console.log(topics)
+        this.setState({
+          topics: topics.topics,
+          loading: false
+        })
+      })
+  }
+  render() {
+    const { loading, topics } = this.state
+    return (
+      <div>
+        {
+          loading ? <p>Loading...</p> : topics.map(topic => {
+            return (
+              <div key={topic._id}>
+              <Link to={``}>
+                <h1>{topic.title}</h1>
+              </Link>
+              </div>
+            )
+          })
+        }
+      </div>
+    );
+  }
+}
+
+export default NavBar;
