@@ -20,6 +20,23 @@ class ArticleList extends Component {
             })
         })
     }
+    componentDidUpdate(prevProps, prevState){
+        if(this.props !== prevProps && prevState === this.state){
+            const {topic_id} = this.props.match.params
+            fetch(`https://robin-pt-nc-news.herokuapp.com/api/topics/${topic_id}/articles/`)
+            .then(res => {
+                return res.json()  
+            })
+            .then(articles => {
+                console.log(articles, 'did mount')
+                this.setState({
+                    articles: articles, 
+                    loading: false
+                })
+            })
+        }
+
+    }
     render() {
         const {loading, articles} = this.state
         let hottest = function (a, b) {

@@ -28,7 +28,7 @@ class NavBar extends Component {
           loading ? <p>Loading...</p> : topics.map(topic => {
             return (
               <div key={topic._id}>
-              <Link to={``}>
+              <Link to={`/${topic._id}`}>
                 <h1>{topic.title}</h1>
               </Link>
               </div>
