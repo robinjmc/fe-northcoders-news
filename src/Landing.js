@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-class ArticleList extends Component {
+class Landing extends Component {
     state = {
         articles: null,
         loading: true
@@ -52,4 +52,4 @@ class ArticleList extends Component {
     }
   }
   
-  export default ArticleList;
+  export default Landing;
