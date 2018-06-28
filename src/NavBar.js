@@ -13,7 +13,7 @@ class NavBar extends Component {
         return res.json()
       })
       .then(topics => {
-        console.log(topics)
+        //console.log(topics)
         this.setState({
           topics: topics.topics,
           loading: false
