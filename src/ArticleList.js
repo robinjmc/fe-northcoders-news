@@ -4,10 +4,18 @@ import { Link } from "react-router-dom";
 class ArticleList extends Component {
     state = {
         articles: null,
-        loading: true
+        loading: true,
+        topic_id: null
     };
     componentDidMount() {
-    const {topic_id} = this.props.match.params
+    const {topicSlug} = this.props.match.params
+        // fetch('https://robin-pt-nc-news.herokuapp.com/api/topics')
+        // .then(res => {
+        //     return res.json()
+        // })
+        // .then(topics => {
+
+        // })
         fetch(`https://robin-pt-nc-news.herokuapp.com/api/topics/${topic_id}/articles/`)
         .then(res => {
             return res.json()  
@@ -22,7 +30,7 @@ class ArticleList extends Component {
     }
     componentDidUpdate(prevProps, prevState){
         if(this.props !== prevProps && prevState === this.state){
-            const {topic_id} = this.props.match.params
+            const {topicSlug} = this.props.match.params
             fetch(`https://robin-pt-nc-news.herokuapp.com/api/topics/${topic_id}/articles/`)
             .then(res => {
                 return res.json()  

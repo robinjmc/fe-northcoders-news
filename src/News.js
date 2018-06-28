@@ -15,7 +15,7 @@ class News extends Component {
         </header>
        
         <Route exact path="/" component={Landing} />
-        <Route exact path="/:topic_id" component={ArticleList} />
+        <Route exact path="/:topicSlug" component={ArticleList} />
         <Route exact path="/articles/:article_id" component={ArticleView} /> 
         
       </div>
