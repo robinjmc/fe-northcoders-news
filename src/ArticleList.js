@@ -5,10 +5,27 @@ class ArticleList extends Component {
     state = {
         articles: null,
         loading: true,
-        topic_id: null
+        topic_id: null,
+        articles_comments: null
     };
     componentDidMount() {
         const { topicSlug } = this.props.match.params
+        fetch('https://robin-pt-nc-news.herokuapp.com/api/articles')
+        .then(res => {
+            return res.json()
+        })
+        .then(articles => {
+            const comments = articles.reduce((acc, curr) => {
+                acc.push({
+                    comment_count: curr.comment_count,
+                    _id: curr._id
+                })
+                return acc;
+            }, [])
+            this.setState({
+                articles_comments: comments
+            })
+        })
         fetch('https://robin-pt-nc-news.herokuapp.com/api/topics')
             .then(res => {
                 return res.json()
@@ -60,7 +77,7 @@ class ArticleList extends Component {
 
     }
     render() {
-        const { loading, articles } = this.state
+        const { loading, articles, articles_comments } = this.state
         let hottest = function (a, b) {
             if (a.comment_count > b.comment_count) {
                 return -1
@@ -82,7 +99,7 @@ class ArticleList extends Component {
                                     <Link to={`/articles/${article._id}`}>
                                         <h3>{article.title}</h3>
                                     </Link>
-                                    <p>comments: {article.comment_count} votes: {article.votes}</p>
+                                    <p>comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count} votes: {article.votes}</p>
                                 </div>
                             )
                         })
