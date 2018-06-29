@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import addDefaultSrc from './ImgLinkBroken'
 
 class FindUsername extends Component {
     state = {
@@ -26,7 +27,7 @@ class FindUsername extends Component {
                     loading ? <p>Loading...</p> :
                     <div>
                     <h4>{user.username}</h4>
-                    <img alt={user.name} src={user.avatar_url}/>
+                    <img onError={addDefaultSrc} alt={user.name} src={user.avatar_url}/>
                     </div>
                     // doesnt the alt render if the image cant be found?
                 }
