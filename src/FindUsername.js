@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class FindUsername extends Component {
     state = {
-        username: null,
+        user: null,
         loading: true
     }
     componentDidMount() {
@@ -13,18 +13,22 @@ class FindUsername extends Component {
             })
           .then(user => {
               this.setState({
-                  username: user.username,
+                  user: user,
                   loading: false
                 })
             })
         }
     render () {
-        const {loading, username} = this.state
+        const {loading, user} = this.state
         return (
             <div>
                 {
                     loading ? <p>Loading...</p> :
-                    <h4>{username}</h4>
+                    <div>
+                    <h4>{user.username}</h4>
+                    <img alt={user.name} src={user.avatar_url}/>
+                    </div>
+                    // doesnt the alt render if the image cant be found?
                 }
             </div>
         )

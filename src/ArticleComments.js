@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FindUsername from './findUser'
+import FindUsername from './FindUsername'
 
 class ArticleComments extends Component {
     state = {

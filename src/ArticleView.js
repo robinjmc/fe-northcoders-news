@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import ArticleComments from "./ArticleComments"
-import FindUsername from "./findUser"
+import FindUsername from "./FindUsername"
 
 class ArticleView extends Component {
   state = {
@@ -16,7 +16,6 @@ componentDidMount() {
         return res.json()  
     })
     .then(article => {
-      console.log(article)
         this.setState({
             article: article, 
             loading: false

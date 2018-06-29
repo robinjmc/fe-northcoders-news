@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import FindUsername from './findUser'
+import FindUsername from './FindUsername'
 
 class ArticleList extends Component {
     state = {
@@ -33,7 +33,6 @@ class ArticleList extends Component {
             })
             .then(topics => {
                 let [topic] = topics.topics.filter(topic => topic.slug === topicSlug)
-                console.log(topic)
                 this.setState({
                     topic_id: topic._id
                 })
@@ -43,7 +42,6 @@ class ArticleList extends Component {
                 return res.json()
             })
             .then(articles => {
-                console.log(articles, 'did mount')
                 this.setState({
                     articles: articles,
                     loading: false
@@ -68,7 +66,6 @@ class ArticleList extends Component {
                     return res.json()
                 })
                 .then(articles => {
-                    console.log(articles, 'did mount')
                     this.setState({
                         articles: articles,
                         loading: false
