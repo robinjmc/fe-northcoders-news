@@ -26,6 +26,7 @@ class ArticleView extends Component {
   }
 
   postComment = (comment) => {
+    const { article_id } = this.props.match.params
     comment.preventDefault();
     fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`, {
       method: 'post',
