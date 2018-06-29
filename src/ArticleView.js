@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import ArticleComments from "./ArticleComments"
+import FindUsername from "./findUser"
 
 class ArticleView extends Component {
   state = {
@@ -10,16 +11,6 @@ class ArticleView extends Component {
 
 componentDidMount() {
   const {article_id} = this.props.match.params
-  // fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
-  //   .then(res => {
-  //     return res.json()
-  //   })
-  //   .then(comments => {
-  //     console.log(comments, 'didmount')
-  //     this.setState({
-  //       comments: comments
-  //     })
-  //   })
   fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}`)
     .then(res => {
         return res.json()  
@@ -40,6 +31,8 @@ componentDidMount() {
           { loading ? <p>Loading...</p> :
             <div>
               <h3>{article.title}</h3>
+              <h4>by</h4> 
+              <FindUsername userId={article.created_by}/>
               <p>{article.body}</p>
             </div>
           }
