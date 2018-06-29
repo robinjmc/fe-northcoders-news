@@ -10,6 +10,7 @@ class ArticleList extends Component {
         articles_comments: null
     };
     componentDidMount() {
+        //having 2 fetches breaks the site sometimes need to fix
         const { topicSlug } = this.props.match.params
         fetch('https://robin-pt-nc-news.herokuapp.com/api/articles')
         .then(res => {

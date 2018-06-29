@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import ArticleView from "./ArticleView";
 import ArticleList from "./ArticleList"
 import Landing from './Landing';
+import UserArticles from "./UserArticles"
 class News extends Component {
   render() {
     return (
@@ -16,7 +17,8 @@ class News extends Component {
        
         <Route exact path="/" component={Landing} />
         <Route exact path="/:topicSlug" component={ArticleList} />
-        <Route exact path="/articles/:article_id" component={ArticleView} /> 
+        <Route exact path="/articles/:article_id" component={ArticleView} />
+        <Route exact path="/users/:user_id" component={UserArticles} /> 
         
       </div>
     
