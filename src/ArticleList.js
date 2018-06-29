@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import FindUsername from './findUser'
 
 class ArticleList extends Component {
     state = {
@@ -87,7 +88,6 @@ class ArticleList extends Component {
             }
             return 0
         }
-        console.log(this.state.articles)
         return (
             <div>
                 {
@@ -99,6 +99,8 @@ class ArticleList extends Component {
                                     <Link to={`/articles/${article._id}`}>
                                         <h3>{article.title}</h3>
                                     </Link>
+                                    <h4>by</h4>
+                                    <FindUsername userId={article.created_by}/>
                                     <p>comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count} votes: {article.votes}</p>
                                 </div>
                             )
