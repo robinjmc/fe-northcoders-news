@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FindUsername from './FindUsername'
+import VoteUpDownButtons from './VoteUpDownButtons'
 
 class ArticleComments extends Component {
     state = {
@@ -62,6 +63,7 @@ class ArticleComments extends Component {
                             <FindUsername userId={comment.created_by} />
                             <p>{comment.body}</p>
                             <p>Votes: {comment.votes}</p>
+                            <VoteUpDownButtons comment_id={comment._id}/>
                         </div>
                     )
                 })
