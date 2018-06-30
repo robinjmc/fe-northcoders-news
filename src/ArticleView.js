@@ -28,9 +28,13 @@ class ArticleView extends Component {
   postComment = (comment) => {
     const { article_id } = this.props.match.params
     comment.preventDefault();
+    console.log( JSON.stringify({comment: comment.target.elements['comment'].value}), 'hello')
     fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`, {
-      method: 'post',
-      body:JSON.stringify({comment: comment.target.elements['comment'].value})
+      method: 'POST',
+      body: JSON.stringify({comment: comment.target.elements['comment'].value}),
+      headers: {
+        'content-type': 'application/json'
+      }
     })
     .then(res => {
       return res.json()
@@ -41,6 +45,14 @@ class ArticleView extends Component {
         commentStatus: 'posted'
       })
     })
+  }
+
+  refreshComplete = (status) => {
+    if(status === this.state.commentStatus){
+      this.setState({
+        commentStatus: ""
+      })
+    }
   }
 
   render() {
@@ -60,7 +72,7 @@ class ArticleView extends Component {
         {/* create return to correct topic functionality if possible */}
         <CommentBox postComment={this.postComment}/>
         <h4>Comments</h4>
-        <ArticleComments article_id={article_id} />
+        <ArticleComments article_id={article_id} commentStatus={this.state.commentStatus} refreshComplete={this.refreshComplete}/>
       </div>
     );
   }

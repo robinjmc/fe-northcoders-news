@@ -21,6 +21,26 @@ class ArticleComments extends Component {
           })
     }
 
+    componentDidUpdate(prevProps, prevState){
+        const {article_id, commentStatus, refreshComplete} = this.props
+        if (prevProps !== this.props && commentStatus === 'posted') {
+            fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
+            .then(res => {
+                return res.json()
+            })
+            .then(comments => {
+                console.log(comments)
+                //const {comments} = this.state
+                this.setState({
+                    comments: comments,
+                    loading: false
+                })
+                refreshComplete('posted')
+            })
+            .catch(console.log)
+          }
+    }
+
     render() {
         const { loading, comments } = this.state;
         let mostRecent = function (a, b) {

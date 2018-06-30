@@ -25,8 +25,8 @@ class CommentBox extends Component {
             <div>
                 <form onSubmit={this.props.postComment}>
                     <h2>Post Comment</h2>
-                    <textarea placeholder="What do you think?" onChange={this.handleCommentChange} value={comment}/>
-                    <button type="submit" disabled={isComment > 0 || /\S/.test(comment) === false}>Submit</button>
+                    <textarea placeholder="What do you think?" name="comment" onChange={this.handleCommentChange} value={comment}/>
+                    <button type="submit" disabled={isComment === 0 || /\S/.test(comment) === false}>Submit</button>
                 </form>
             </div>
         )
