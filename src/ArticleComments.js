@@ -4,7 +4,7 @@ import VoteUpDownButtons from './VoteUpDownButtons'
 
 class ArticleComments extends Component {
     state = {
-        comments: null,
+        comments: [], //keep same data type
         loading: true
     }
 
@@ -39,7 +39,26 @@ class ArticleComments extends Component {
                 refreshComplete('posted')
             })
             .catch(console.log)
-          }
+        }
+        else if (prevState.comments !== this.state.comments && prevProps === this.props){
+            console.log('hello')
+        }
+    }
+
+    voteComment = (vote, id) => {
+        this.state.comments.map(comment => {
+            if (comment._id === id){
+                if(vote === 'up'){
+                    console.log('up')
+                    return comment.votes++
+                }
+                else if(vote === 'down'){
+                    console.log('down')
+                    return comment.votes--
+                }
+            }
+        })
+        console.log(this.state.comments)
     }
 
     render() {
@@ -63,7 +82,7 @@ class ArticleComments extends Component {
                             <FindUsername userId={comment.created_by} />
                             <p>{comment.body}</p>
                             <p>Votes: {comment.votes}</p>
-                            <VoteUpDownButtons comment_id={comment._id}/>
+                            <VoteUpDownButtons comment_id={comment._id} voteComment={this.voteComment}/>
                         </div>
                     )
                 })
