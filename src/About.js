@@ -5,7 +5,7 @@ class About extends Component {
       return (
         <div style={{"backgroundColor": "black"}}>
             <img 
-            style={{transform: "scale(0.70)"}}src="https://northcoders.com/images/logos/learn_to_code_manchester_rw_logo.png" alt="Northcoders"/>
+            className="img-fluid" style={{transform: "scale(0.70)"}} src="https://northcoders.com/images/logos/learn_to_code_manchester_rw_logo.png" alt="Northcoders"/>
         </div>
       );
     }

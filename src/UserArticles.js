@@ -38,19 +38,29 @@ class UserArticles extends Component {
                 {loading ? <p>Loading...</p> :
                     <div>
                         <h1>{user.name}</h1>
-                        <img onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
+                        <img className="img-fluid" onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
                         {articles.filter(article => {
                             return article.created_by === this.props.match.params.user_id
                         }).map(article => {
                             //could create a 'in' element that says the topic each article is in
                             return (
-                                <div key={article._id}>
-                                    <Link to={`/articles/${article._id}`}>
-                                        <h3>{article.title}</h3>
-                                    </Link>
-                                    <h4>by {user.username}</h4>
-                                    <p>Comments: {article.comment_count}</p>
-                                    <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                <div className="row">
+                                 <div className="col-md-4" style={{ border: "2px solid" }}>
+              <p></p>
+            </div>
+                                    <div className="col-md-4">
+                                        <div key={article._id} className="item">
+                                            <Link to={`/articles/${article._id}`}>
+                                                <h3>{article.title}</h3>
+                                            </Link>
+                                            <h4>by {user.username}</h4>
+                                            <p>Comments: {article.comment_count}</p>
+                                            <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+              <p></p>
+            </div>
                                 </div>
                             )
                         })}

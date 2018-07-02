@@ -94,14 +94,24 @@ class ArticleList extends Component {
                         .sort(hottest)
                         .map(article => {
                             return (
-                                <div key={article._id}>
-                                    <Link to={`/articles/${article._id}`}>
-                                        <h3>{article.title}</h3>
-                                    </Link>
-                                    <h4>by</h4>
-                                    <FindUsername userId={article.created_by} />
-                                    <p>Comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count}</p>
-                                    <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                <div className="row">
+                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                        <p></p>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div key={article._id} className="item">
+                                            <Link to={`/articles/${article._id}`}>
+                                                <h3>{article.title}</h3>
+                                            </Link>
+                                            <h4>by</h4>
+                                            <FindUsername userId={article.created_by} />
+                                            <p>Comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count}</p>
+                                            <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                        <p></p>
+                                    </div>
                                 </div>
                             )
                         })

@@ -23,24 +23,28 @@ class NavBar extends Component {
   render() {
     const { loading, topics } = this.state
     return (
-      <div>
-        {
-          loading ? <p>Loading...</p> : topics.map(topic => {
-            return (
-              <div key={topic._id}>
-                <Link to={`/${topic.slug}`}>
-                  <h1>{topic.title}</h1>
-                </Link>
-              </div>
-            )
-          })
-        }
-        <div>
-          <Link to='/'>
-            <h1>All</h1>
-          </Link>
+      <nav className="navbar navbar-default">
+        <div className="container-fluid" style={{ border: "2px solid" }}>
+        {/* <div className="collapse navbar-collapse"> */}
+          {
+            loading ? <p>Loading...</p> : topics.map(topic => {
+              return (
+                <div key={topic._id} style={{ border: "2px solid" }}>
+                  <Link to={`/${topic.slug}`}>
+                    <h1>{topic.title}</h1>
+                  </Link>
+                </div>
+              )
+            })
+          }
+          <div style={{ border: "2px solid" }}>
+            <Link to='/'>
+              <h1>All</h1>
+            </Link>
+            </div>
+          {/* </div> */}
         </div>
-      </div>
+      </nav>
     );
   }
 }

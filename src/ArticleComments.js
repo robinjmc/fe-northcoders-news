@@ -9,39 +9,36 @@ class ArticleComments extends Component {
     }
 
     componentDidMount() {
-        const {article_id} = this.props
+        const { article_id } = this.props
         fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
-          .then(res => {
-            return res.json()
-          })
-          .then(comments => {
-            this.setState({
-              comments: comments,
-              loading: false
-            })
-          })
-    }
-
-    componentDidUpdate(prevProps, prevState){
-        const {article_id, commentStatus, refreshComplete} = this.props
-        if (prevProps !== this.props && commentStatus === 'posted') {
-            fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
             .then(res => {
                 return res.json()
             })
             .then(comments => {
-                console.log(comments)
-                //const {comments} = this.state
                 this.setState({
                     comments: comments,
                     loading: false
                 })
-                refreshComplete('posted')
             })
-            .catch(console.log)
-        }
-        else if (prevState.comments !== this.state.comments && prevProps === this.props){
-            console.log('hello')
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { article_id, commentStatus, refreshComplete } = this.props
+        if (prevProps !== this.props && commentStatus === 'posted') {
+            fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
+                .then(res => {
+                    return res.json()
+                })
+                .then(comments => {
+                    console.log(comments)
+                    //const {comments} = this.state
+                    this.setState({
+                        comments: comments,
+                        loading: false
+                    })
+                    refreshComplete('posted')
+                })
+                .catch(console.log)
         }
     }
 
@@ -58,18 +55,28 @@ class ArticleComments extends Component {
         }
         return (
             <div>
-            {
-                loading ? <p>Loading...</p> :
-                comments.sort(mostRecent).map(comment => {
-                    return (
-                        <div key={comment._id}>
-                            <FindUsername userId={comment.created_by} />
-                            <p>{comment.body}</p>
-                            <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'}/>
-                        </div>
-                    )
-                })
-            }
+                {
+                    loading ? <p>Loading...</p> :
+                        comments.sort(mostRecent).map(comment => {
+                            return (
+                                <div className="row">
+                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                        <p></p>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <div key={comment._id} className="item">
+                                            <FindUsername userId={comment.created_by} />
+                                            <p>{comment.body}</p>
+                                            <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'} />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                }
             </div>
         )
     }

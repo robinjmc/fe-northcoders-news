@@ -15,7 +15,7 @@ class VoteUpDownButtons extends Component {
     vote = (upDown) => {
         const { value } = upDown.target
         const { _id, type } = this.props
-        const { UpOrDown } = this.state
+        const { UpOrDown, voteCount } = this.state
         if (value !== UpOrDown) {
             fetch(`https://robin-pt-nc-news.herokuapp.com/api/${type}/${_id}?vote=${value}`, {
                 method: 'put'
@@ -29,7 +29,18 @@ class VoteUpDownButtons extends Component {
                     })
 
                 })
-                .catch(console.log)
+                .catch(body => {
+                    if(UpOrDown === 'up'){
+                        this.setState({
+                            voteCount: voteCount - 1
+                        })
+                    }
+                    else if(UpOrDown === 'down'){
+                        this.setState({
+                            voteCount: voteCount + 1
+                        })
+                    }}
+                )
         }
     }
 

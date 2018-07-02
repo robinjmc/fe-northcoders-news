@@ -31,7 +31,11 @@ class FindUsername extends Component {
                             <Link to={`/users/${userId}`}>
                                 <h4>{user.username}</h4>
                             </Link>
-                            <img onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
+                            <img className="img-fluid" style={{
+                                width: "200px", 
+                                height: "100%",
+                                objectFit: "cover"
+                            }} onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
                         </div>
                     // doesnt the alt render if the image cant be found?
                 }
