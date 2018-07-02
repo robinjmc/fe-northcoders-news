@@ -66,13 +66,15 @@ class VoteUpDownButtons extends Component {
         const { UpOrDown, voteCount } = this.state;
         const up = UpOrDown === 'up' ? true : false;
         const down = UpOrDown === 'down' ? true : false;
+        const upOn = up ? ["fas fa-thumbs-up fa-2x", {color: "green"}] : ["far fa-thumbs-up fa-2x", {color:""}]
+        const upDown = down ? ["fas fa-thumbs-down fa-2x", {color: "red"}] : ["far fa-thumbs-down fa-2x", {color:""}]
         return (
             <div>
                 {
                     <div>
                         <p>Votes: {voteCount}</p>
-                        <button name="up" value="up" type="button" onClick={this.vote} disabled={up}>Up</button>
-                        <button name="down" value="down" type="button" onClick={this.vote} disabled={down}>Down</button>
+                        <button class={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
+                        <button class={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
                     </div>
                 }
             </div>

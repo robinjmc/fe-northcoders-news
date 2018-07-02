@@ -45,9 +45,9 @@ class UserArticles extends Component {
                             //could create a 'in' element that says the topic each article is in
                             return (
                                 <div className="row">
-                                 <div className="col-md-4" style={{ border: "2px solid" }}>
-              <p></p>
-            </div>
+                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                        <p></p>
+                                    </div>
                                     <div className="col-md-4">
                                         <div key={article._id} className="item">
                                             <Link to={`/articles/${article._id}`}>
@@ -59,8 +59,8 @@ class UserArticles extends Component {
                                         </div>
                                     </div>
                                     <div className="col-md-4" style={{ border: "2px solid" }}>
-              <p></p>
-            </div>
+                                        <p></p>
+                                    </div>
                                 </div>
                             )
                         })}
