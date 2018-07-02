@@ -45,21 +45,21 @@ class ArticleComments extends Component {
         }
     }
 
-    voteComment = (vote, id) => {
-        this.state.comments.map(comment => {
-            if (comment._id === id){
-                if(vote === 'up'){
-                    console.log('up')
-                    return comment.votes++
-                }
-                else if(vote === 'down'){
-                    console.log('down')
-                    return comment.votes--
-                }
-            }
-        })
-        console.log(this.state.comments)
-    }
+    // voteComment = (vote, id) => {
+    //     this.state.comments.map(comment => {
+    //         if (comment._id === id){
+    //             if(vote === 'up'){
+    //                 console.log('up')
+    //                 return comment.votes++
+    //             }
+    //             else if(vote === 'down'){
+    //                 console.log('down')
+    //                 return comment.votes--
+    //             }
+    //         }
+    //     })
+    //     console.log(this.state.comments)
+    // }
 
     render() {
         const { loading, comments } = this.state;
@@ -81,8 +81,7 @@ class ArticleComments extends Component {
                         <div key={comment._id}>
                             <FindUsername userId={comment.created_by} />
                             <p>{comment.body}</p>
-                            <p>Votes: {comment.votes}</p>
-                            <VoteUpDownButtons comment_id={comment._id} voteComment={this.voteComment}/>
+                            <VoteUpDownButtons voteCount={comment.votes} comment_id={comment._id} voteComment={this.voteComment}/>
                         </div>
                     )
                 })
