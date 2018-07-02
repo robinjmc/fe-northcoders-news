@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import FindUsername from './FindUsername'
+import FindUsername from './FindUsername';
+import VoteUpDownButtons from './VoteUpDownButtons';
 
 class ArticleList extends Component {
     state = {
@@ -13,22 +14,22 @@ class ArticleList extends Component {
         //having 2 fetches breaks the site sometimes need to fix
         const { topicSlug } = this.props.match.params
         fetch('https://robin-pt-nc-news.herokuapp.com/api/articles')
-        .then(res => {
-            return res.json()
-        })
-        .then(articles => {
-            const comments = articles.reduce((acc, curr) => {
-                acc.push({
-                    comment_count: curr.comment_count,
-                    _id: curr._id
-                })
-                return acc;
-            }, [])
-            this.setState({
-                articles_comments: comments
+            .then(res => {
+                return res.json()
             })
-        })
-        fetch('https://robin-pt-nc-news.herokuapp.com/api/topics')
+            .then(articles => {
+                const comments = articles.reduce((acc, curr) => {
+                    acc.push({
+                        comment_count: curr.comment_count,
+                        _id: curr._id
+                    })
+                    return acc;
+                }, [])
+                this.setState({
+                    articles_comments: comments
+                })
+                return fetch('https://robin-pt-nc-news.herokuapp.com/api/topics')
+            })
             .then(res => {
                 return res.json()
             })
@@ -98,8 +99,9 @@ class ArticleList extends Component {
                                         <h3>{article.title}</h3>
                                     </Link>
                                     <h4>by</h4>
-                                    <FindUsername userId={article.created_by}/>
-                                    <p>comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count} votes: {article.votes}</p>
+                                    <FindUsername userId={article.created_by} />
+                                    <p>Comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count}</p>
+                                    <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
                                 </div>
                             )
                         })

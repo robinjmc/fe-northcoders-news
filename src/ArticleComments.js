@@ -45,22 +45,6 @@ class ArticleComments extends Component {
         }
     }
 
-    // voteComment = (vote, id) => {
-    //     this.state.comments.map(comment => {
-    //         if (comment._id === id){
-    //             if(vote === 'up'){
-    //                 console.log('up')
-    //                 return comment.votes++
-    //             }
-    //             else if(vote === 'down'){
-    //                 console.log('down')
-    //                 return comment.votes--
-    //             }
-    //         }
-    //     })
-    //     console.log(this.state.comments)
-    // }
-
     render() {
         const { loading, comments } = this.state;
         let mostRecent = function (a, b) {
@@ -81,7 +65,7 @@ class ArticleComments extends Component {
                         <div key={comment._id}>
                             <FindUsername userId={comment.created_by} />
                             <p>{comment.body}</p>
-                            <VoteUpDownButtons voteCount={comment.votes} comment_id={comment._id} voteComment={this.voteComment}/>
+                            <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'}/>
                         </div>
                     )
                 })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import addDefaultSrc from './ImgLinkBroken';
 import { Link } from "react-router-dom";
+import VoteUpDownButtons from "./VoteUpDownButtons"
 
 class UserArticles extends Component {
     state = {
@@ -48,7 +49,8 @@ class UserArticles extends Component {
                                         <h3>{article.title}</h3>
                                     </Link>
                                     <h4>by {user.username}</h4>
-                                    <p>comments: {article.comment_count} votes: {article.votes}</p>
+                                    <p>Comments: {article.comment_count}</p>
+                                    <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
                                 </div>
                             )
                         })}

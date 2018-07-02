@@ -14,17 +14,16 @@ class VoteUpDownButtons extends Component {
 
     vote = (upDown) => {
         const { value } = upDown.target
-        const { comment_id } = this.props
+        const { _id, type } = this.props
         const { UpOrDown } = this.state
         if (value !== UpOrDown) {
-            fetch(`https://robin-pt-nc-news.herokuapp.com/api/comments/${comment_id}?vote=${value}`, {
+            fetch(`https://robin-pt-nc-news.herokuapp.com/api/${type}/${_id}?vote=${value}`, {
                 method: 'put'
             })
                 .then(res => {
                     return res.json()
                 })
                 .then(voted => {
-                    //voteComment(value, comment_id)
                     this.setState({
                         UpOrDown: value
                     })
