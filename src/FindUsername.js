@@ -35,7 +35,7 @@ class FindUsername extends Component {
                                 <h5>{user.name}</h5>
                             </Link>
                             <img className="img-fluid" style={{ 
-                                width: "900%",
+                                width: "100%",
                                 objectFit: "cover",
                                 borderRadius: "50%"
                             }} onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
