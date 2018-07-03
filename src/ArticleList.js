@@ -95,21 +95,51 @@ class ArticleList extends Component {
                         .map(article => {
                             return (
                                 <div className="row">
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                    <div className="col" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-12 col-md-8">
+
                                         <div key={article._id} className="item">
-                                            <Link to={`/articles/${article._id}`}>
-                                                <h3>{article.title}</h3>
-                                            </Link>
-                                            <h4>by</h4>
-                                            <FindUsername userId={article.created_by} />
-                                            <p>Comments: {articles_comments.filter(comment => comment._id === article._id)[0].comment_count}</p>
-                                            <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                            <div className="row">
+                                                <div className="col-md-5">
+                                                    <h4> </h4>
+                                                    {/* <h4>by</h4> */}
+                                                    <FindUsername userId={article.created_by} />
+
+                                                </div>
+                                                <div style={{ margin: "auto", width: "50%", textAlign: "center"}}className="col"><VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} /></div>
+                                                <div className="col-md-5">
+                                                    <div>
+                                                        <h6 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>{articles_comments.filter(comment => comment._id === article._id)[0].comment_count} Comments</h6>
+                                                    </div>
+                                                    <div style={{
+                                                        textAlign: "right",
+                                                        margin: "auto",
+                                                        width: "100%",
+                                                        padding: "10px",
+                                                        border: "2px solid"
+                                                    }}>
+                                                        <Link to={`/articles/${article._id}`}>
+                                                            <h3>{article.title}</h3>
+                                                        </Link>
+                                                    </div>
+                                                    {/* <div style={{ padding: "15px", float: "right"}}> */}
+
+                                                    {/* </div> */}
+                                                    <div style={{ padding: "15px", float: "right" }}>
+                                                        {/* <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} /> */}
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                    <div className="col" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
                                 </div>

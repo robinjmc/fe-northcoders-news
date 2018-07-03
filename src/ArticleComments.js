@@ -65,8 +65,12 @@ class ArticleComments extends Component {
                                     </div>
                                     <div className="col-md-4">
                                         <div key={comment._id} className="item">
-                                            <FindUsername userId={comment.created_by} />
-                                            <p>{comment.body}</p>
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <FindUsername userId={comment.created_by} />
+                                                </div>
+                                                <div className="col-md-6"><p>{comment.body}</p></div>
+                                            </div>
                                             <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'} />
                                         </div>
                                     </div>

@@ -30,16 +30,17 @@ class VoteUpDownButtons extends Component {
 
                 })
                 .catch(body => {
-                    if(UpOrDown === 'up'){
+                    if (UpOrDown === 'up') {
                         this.setState({
                             voteCount: voteCount - 1
                         })
                     }
-                    else if(UpOrDown === 'down'){
+                    else if (UpOrDown === 'down') {
                         this.setState({
                             voteCount: voteCount + 1
                         })
-                    }}
+                    }
+                }
                 )
         }
     }
@@ -66,15 +67,17 @@ class VoteUpDownButtons extends Component {
         const { UpOrDown, voteCount } = this.state;
         const up = UpOrDown === 'up' ? true : false;
         const down = UpOrDown === 'down' ? true : false;
-        const upOn = up ? ["fas fa-thumbs-up fa-2x", {color: "green"}] : ["far fa-thumbs-up fa-2x", {color:""}]
-        const upDown = down ? ["fas fa-thumbs-down fa-2x", {color: "red"}] : ["far fa-thumbs-down fa-2x", {color:""}]
+        const upOn = up ? ["fas fa-thumbs-up fa-2x bg-white", { color: "green", borderStyle: "solid", borderColor: "#FEFEFE" }] : ["far fa-thumbs-up fa-2x bg-white", { color: "", borderStyle: "solid", borderColor: "#FEFEFE" }]
+        const upDown = down ? ["fas fa-thumbs-down fa-2x bg-white", { color: "red", borderStyle: "solid", borderColor: "#FEFEFE" }] : ["far fa-thumbs-down fa-2x bg-white", { color: "", borderStyle: "solid", borderColor: "#FEFEFE" }]
         return (
             <div>
                 {
                     <div>
-                        <p>Votes: {voteCount}</p>
-                        <button class={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
-                        <button class={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
+                        {/* <div className="row" style={{ padding: "15px" }}> */}
+                            <button class={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
+                            <button class={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
+                            <p style={{ padding: "15px" }}>Votes: {voteCount}</p>
+                        {/* </div> */}
                     </div>
                 }
             </div>

@@ -44,22 +44,40 @@ class UserArticles extends Component {
                         }).map(article => {
                             //could create a 'in' element that says the topic each article is in
                             return (
-                                <div className="row">
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
-                                        <p></p>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <div key={article._id} className="item">
-                                            <Link to={`/articles/${article._id}`}>
-                                                <h3>{article.title}</h3>
-                                            </Link>
-                                            <h4>by {user.username}</h4>
-                                            <p>Comments: {article.comment_count}</p>
-                                            <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                <div class="container" >
+                                    <div className="row">
+                                        {/* <div className="col" style={{ border: "2px solid" }}>
+                                        </div> */}
+                                        <div className="col-12 col-md-8">
+                                            <div class="container" >
+                                                <div className="row">
+                                                    <div key={article._id} className="item">
+                                                        
+                                                        <div className="col-sm" style={{ border: "2px solid" }}>
+                                                            <div style={{
+                                                                textAlign: "right",
+                                                                margin: "auto",
+                                                                width: "70%",
+                                                                padding: "10px",
+                                                                border: "2px solid"
+                                                            }}>
+                                                                <Link to={`/articles/${article._id}`}>
+                                                                    <h3 >{article.title}</h3>
+                                                                </Link>
+                                                                <h4>by {user.username}</h4>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-sm" style={{ border: "2px solid" }}>
+                                                            <p>Comments: {article.comment_count}</p>
+                                                            <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
-                                        <p></p>
+                                        {/* <div className="col" style={{ border: "2px solid" }}>
+                                            <p></p>
+                                        </div> */}
                                     </div>
                                 </div>
                             )
