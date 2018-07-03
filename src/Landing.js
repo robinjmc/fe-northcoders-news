@@ -14,7 +14,6 @@ class Landing extends Component {
                 return res.json()
             })
             .then(articles => {
-                console.log(articles, 'did mount')
                 this.setState({
                     articles: articles,
                     loading: false
@@ -40,7 +39,6 @@ class Landing extends Component {
                 return 0
             }
         }
-        console.log(this.state.articles)
         return (
             <div>
                 {
@@ -48,7 +46,7 @@ class Landing extends Component {
                         .sort(hottest)
                         .map(article => {
                             return (
-                                <div className="row">
+                                <div key={article._id} className="row">
                                     <div className="col" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>

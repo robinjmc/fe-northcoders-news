@@ -21,10 +21,10 @@ class LoginBox extends Component {
         let isUsername = username.length;
         return (
             <div className="container">
-                <form>
+                <form onSubmit={this.props.logIn}>
                     <p>
                     <label className="sr-only">Username</label>
-                    <input className="form-control" type="text" placeholder="Username" onChange={this.handleUsernameChange} value={username}/>
+                    <input name="username" className="form-control" type="text" placeholder="Username" onChange={this.handleUsernameChange} value={username}/>
                     </p>
                     <button disabled={!isUsername || !/\S/.test(username)} type="submit" className="btn btn-block">Sign in</button>
                 </form>

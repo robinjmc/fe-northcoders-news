@@ -59,7 +59,7 @@ class ArticleComments extends Component {
                     loading ? <p>Loading...</p> :
                         comments.sort(mostRecent).map(comment => {
                             return (
-                                <div className="row">
+                                <div key={comment._id} className="row">
                                     <div className="col-2" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
