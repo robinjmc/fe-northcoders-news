@@ -15,9 +15,7 @@ class News extends Component {
   }
   //would it make more sense for me to go back to the back end and make a api/users end point that shows all users?
   componentDidMount() {
-    var aKeyName = localStorage.key(0)
     let userLocal = localStorage.getItem("username");
-    console.log(userLocal, aKeyName)
     if (userLocal) {
       this.setState({
         username: userLocal
@@ -28,8 +26,7 @@ class News extends Component {
         return res.json()
       })
       .then(articles => {
-        const { userIds, username } = this.state
-        console.log(username, 'hello')
+        const { userIds } = this.state
         articles.map(article => {
           if (!userIds.includes(article.created_by)) {
             userIds.push(article.created_by)
@@ -39,7 +36,6 @@ class News extends Component {
               })
               .then(userData => {
                 this.state.users.push(userData)
-                console.log(this.state.users)
               })
           }
         })
@@ -47,24 +43,17 @@ class News extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    var aKeyName = localStorage.key(0)
-    let userLocal = localStorage.getItem("username");
-
     if (prevState.username !== this.state.username) {
-      console.log(userLocal, aKeyName, 'hello', this.state.username)
       return localStorage.setItem("username", this.state.username)
     }
   }
 
   logIn = (username) => {
-    console.log(username.target.elements['username'].value)
     username.preventDefault();
     const userExists = this.state.users.filter(user => {
       return user.username === username.target.elements['username'].value
     })
-    console.log(userExists, this.state.users)
     if (userExists[0]) {
-      console.log(username, "userExists!", userExists)
       this.setState({
         username: username.target.elements['username'].value
       })
@@ -77,26 +66,24 @@ class News extends Component {
     })
     return localStorage.clear()
   }
-  
+
   render() {
     let { username } = this.state;
 
     return (
       <div>
-        <header style={{ border: "2px solid" }}>
+        <header >
           <div className="row">
-            <div className="col-4" style={{ margin: "auto", width: "50%" }}>
+            <div className="col" >
               <div className="row">
-                
               </div>
             </div>
-            <div className="col-md-4" style={{ border: "2px solid" }}>
+            <div className="col-12 col-md-7" >
               <img className="img-fluid" src="https://northcoders.com/images/logos/learn_to_code_manchester_original_second.png" alt="Northcoders" />
             </div>
-            <div className="col-md-4" style={{ margin: "auto", width: "50%", textAlign:"center", border: "2px solid" }}>
+            <div className="col" style={{ margin: "auto", textAlign: "center", padding: "80px 80px" }}>
               {username.length ? <div> <h3>{username}</h3> <button type="button" onClick={this.logOut}>Logout</button> </div> : <LoginBox logIn={this.logIn} />}
             </div>
-
           </div>
           <NavBar />
         </header>
