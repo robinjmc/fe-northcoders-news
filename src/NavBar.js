@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
+import "./NavBar.css"
+
 class NavBar extends Component {
   state = {
     topics: null,
@@ -23,13 +25,12 @@ class NavBar extends Component {
   render() {
     const { loading, topics } = this.state
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid" style={{ border: "2px solid" }}>
-        {/* <div className="collapse navbar-collapse"> */}
+      <div>
+        <nav className="navBar navbar navbar-fluid navbar-dark bg-dark" >
           {
             loading ? <p>Loading...</p> : topics.map(topic => {
               return (
-                <div key={topic._id} style={{ border: "2px solid" }}>
+                <div key={topic._id} >
                   <Link to={`/${topic.slug}`}>
                     <h1>{topic.title}</h1>
                   </Link>
@@ -37,14 +38,13 @@ class NavBar extends Component {
               )
             })
           }
-          <div style={{ border: "2px solid" }}>
+          <div >
             <Link to='/'>
               <h1>All</h1>
             </Link>
-            </div>
-          {/* </div> */}
-        </div>
-      </nav>
+          </div>
+        </nav>
+      </div>
     );
   }
 }

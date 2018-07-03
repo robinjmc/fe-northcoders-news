@@ -7,6 +7,8 @@ import ArticleList from "./ArticleList"
 import Landing from './Landing';
 import UserArticles from "./UserArticles";
 import LoginBox from "./LoginBox";
+
+import "./News.css"
 class News extends Component {
   state = {
     username: '',
@@ -69,10 +71,10 @@ class News extends Component {
 
   render() {
     let { username } = this.state;
-
+//fixed-top
     return (
-      <div>
-        <header >
+      <div> 
+        <header>
           <div className="row">
             <div className="col" >
               <div className="row">
@@ -81,8 +83,10 @@ class News extends Component {
             <div className="col-12 col-md-7" >
               <img className="img-fluid" src="https://northcoders.com/images/logos/learn_to_code_manchester_original_second.png" alt="Northcoders" />
             </div>
-            <div className="col" style={{ margin: "auto", textAlign: "center", padding: "80px 80px" }}>
+            <div className="col">
+            <div className="loginout">
               {username.length ? <div> <h3>{username}</h3> <button type="button" onClick={this.logOut}>Logout</button> </div> : <LoginBox logIn={this.logIn} />}
+            </div>
             </div>
           </div>
           <NavBar />
