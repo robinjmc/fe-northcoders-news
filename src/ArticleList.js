@@ -108,10 +108,14 @@ class ArticleList extends Component {
                                                     <FindUsername userId={article.created_by} />
 
                                                 </div>
-                                                <div style={{ margin: "auto", width: "50%", textAlign: "center"}}className="col"><VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} /></div>
+                                                <div style={{ margin: "auto", width: "50%", textAlign: "center", border: "2px solid" }} className="col">
+                                                    <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                                </div>
                                                 <div className="col-md-5">
                                                     <div>
-                                                        <h6 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>{articles_comments.filter(comment => comment._id === article._id)[0].comment_count} Comments</h6>
+                                                        <h6 style={{ padding: "10px", margin: "auto", textAlign: "right", border: "2px solid" }}>
+                                                            {articles_comments.filter(comment => comment._id === article._id)[0].comment_count} Comments
+                                                        </h6>
                                                     </div>
                                                     <div style={{
                                                         textAlign: "right",
@@ -127,7 +131,7 @@ class ArticleList extends Component {
                                                     {/* <div style={{ padding: "15px", float: "right"}}> */}
 
                                                     {/* </div> */}
-                                                    <div style={{ padding: "15px", float: "right" }}>
+                                                    <div style={{ padding: "15px", float: "right", border: "2px solid" }}>
                                                         {/* <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} /> */}
                                                     </div>
 

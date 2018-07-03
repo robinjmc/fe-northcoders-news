@@ -61,11 +61,22 @@ class ArticleView extends Component {
     return (
       <div>
         {loading ? <p>Loading...</p> :
-          <div>
-            <h3>{article.title}</h3>
-            <h4>by</h4>
-            <FindUsername userId={article.created_by} />
-            <p>{article.body}</p>
+        <div>
+        <div className="row" style={{ border: "2px solid", padding: "70px 0" }}>
+        </div>
+          <div className="row">
+            <div className="col-10 col-md-2"><FindUsername userId={article.created_by} /></div>
+            <div className="col" style={{ border: "2px solid", padding: "70px 0" }}>
+            <div className="row" style={{ border: "2px solid", padding: "30px 0", width: "60%", margin: "auto"  }}>
+            <h3 style={{border: "2px solid", padding: "30px 0", width: "60%", margin: "auto", textAlign:"center"}}>{article.title}</h3>
+            </div>
+            <div className="row" style={{ border: "2px solid", padding: "50px 0", width: "60%", margin: "auto"  }}>
+            
+            <p style={{border: "2px solid", padding: "30px 0", width: "90%", margin: "auto"}}>{article.body}</p>
+            </div>
+            </div>
+            <div className="col-12 col-md-3" style={{ border: "2px solid", padding: "70px 0" }}></div>
+          </div>
           </div>
         }
         <Link to="/">return to feed</Link>

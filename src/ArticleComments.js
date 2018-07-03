@@ -60,21 +60,36 @@ class ArticleComments extends Component {
                         comments.sort(mostRecent).map(comment => {
                             return (
                                 <div className="row">
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                    <div className="col-2" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-12 col-md-7">
                                         <div key={comment._id} className="item">
                                             <div className="row">
-                                                <div className="col-md-6">
-                                                    <FindUsername userId={comment.created_by} />
-                                                </div>
-                                                <div className="col-md-6"><p>{comment.body}</p></div>
+                                                <div className="col" style={{ margin: "auto", padding: "70px 0", textAlign: "center", border: "2px solid" }}>
+                                                    <div className="row" style={{ border: "1px solid", width: "60%", margin: "auto" }}>
+                                                        <div className="col-12 col-md-4" >
+                                                            <div>
+                                                                <FindUsername userId={comment.created_by} />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col" style={{ border: "2px solid", padding: "70px 0" }}>
+                                                            <p style={{ border: "2px solid", padding: "70px 0" }}>{comment.body}</p>
+                                                        </div>
+                                                        <div className="col-12 col-md-3" style={{ margin: "auto", width: "50%", textAlign: "center", border: "2px solid" }}>
+
+                                                <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'} />
                                             </div>
-                                            <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'} />
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            
+                                            </div>
+                                            
                                         </div>
                                     </div>
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                    <div className="col-2" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
                                 </div>

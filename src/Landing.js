@@ -49,10 +49,10 @@ class Landing extends Component {
                         .map(article => {
                             return (
                                 <div className="row">
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                    <div className="col" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-12 col-md-8">
                                         <div key={article._id} className="item" style={{ border: "2px solid" }}>
                                             <Link to={`/articles/${article._id}`}>
                                                 <h3>{article.title}</h3>
@@ -60,10 +60,12 @@ class Landing extends Component {
                                             <h4>by</h4>
                                             <FindUsername userId={article.created_by} />
                                             <p>Comments: {article.comment_count}</p>
-                                            <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                            <div style={{ margin: "auto", width: "50%", textAlign: "center", border: "2px solid" }}>
+                                                <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-4" style={{ border: "2px solid" }}>
+                                    <div className="col" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
                                 </div>
