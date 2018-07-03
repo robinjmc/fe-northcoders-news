@@ -11,7 +11,6 @@ class ArticleList extends Component {
         articles_comments: null
     };
     componentDidMount() {
-        //having 2 fetches breaks the site sometimes need to fix
         const { topicSlug } = this.props.match.params
         fetch('https://robin-pt-nc-news.herokuapp.com/api/articles')
             .then(res => {
@@ -95,7 +94,7 @@ class ArticleList extends Component {
                         .map(article => {
                             return (
                                 <div key={article._id} className="row">
-                                    <div className="col" style={{ border: "2px solid" }}>
+                                    <div className="col" >
                                         <p></p>
                                     </div>
                                     <div className="col-12 col-md-8">
@@ -103,12 +102,10 @@ class ArticleList extends Component {
                                         <div className="item">
                                             <div className="row">
                                                 <div className="col-md-5">
-                                                    <h4> </h4>
-                                                    {/* <h4>by</h4> */}
+                                                    <h4></h4>
                                                     <FindUsername userId={article.created_by} />
-
                                                 </div>
-                                                <div style={{ margin: "auto", width: "50%", textAlign: "center", border: "2px solid" }} className="col">
+                                                <div style={{ margin: "auto", width: "100%", textAlign: "center", border: "2px solid", padding: "70px 0" }} className="col">
                                                     <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
                                                 </div>
                                                 <div className="col-md-5">

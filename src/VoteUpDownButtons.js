@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import "./VoteUpDown.css"
+
 class VoteUpDownButtons extends Component {
     state = {
         UpOrDown: null,
@@ -67,17 +69,18 @@ class VoteUpDownButtons extends Component {
         const { UpOrDown, voteCount } = this.state;
         const up = UpOrDown === 'up' ? true : false;
         const down = UpOrDown === 'down' ? true : false;
-        const upOn = up ? ["fas fa-thumbs-up fa-2x bg-white", { color: "green", borderStyle: "solid", borderColor: "#FEFEFE" }] : ["far fa-thumbs-up fa-2x bg-white", { color: "", borderStyle: "solid", borderColor: "#FEFEFE" }]
-        const upDown = down ? ["fas fa-thumbs-down fa-2x bg-white", { color: "red", borderStyle: "solid", borderColor: "#FEFEFE" }] : ["far fa-thumbs-down fa-2x bg-white", { color: "", borderStyle: "solid", borderColor: "#FEFEFE" }]
+        const upOn = up ? ["fas fa-thumbs-up fa-2x bg-white up", { color: "green" }] : ["far fa-thumbs-up fa-2x bg-white up", { color: "" }]
+        const upDown = down ? ["fas fa-thumbs-down fa-2x bg-white down", { color: "red" }] : ["far fa-thumbs-down fa-2x bg-white down", { color: "" }]
         return (
             <div>
                 {
-                    <div style={{border: "2px solid", padding:"10px", margin: "auto", width: "50%"}}>
+                    <div>
                         {/* <div className="row" style={{ padding: "15px" }}> */}
                         <div style={{ padding: "15px" }}></div>
-                            <button className={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
-                            <button className={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
-                            <p style={{ padding: "15px", textAlign:"center" }}>{voteCount}</p>
+                        <button className={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
+                        <h2 style={{ textAlign: "center" }}>{voteCount}</h2>
+                        <button className={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
+
                         {/* </div> */}
                     </div>
                 }

@@ -1,0 +1,11 @@
+.up{
+    border-style: solid;
+    border-color: #FEFEFE; 
+    padding: 15px;
+}
+
+.down{
+    border-style: solid;
+    border-color: #FEFEFE; 
+    padding: 9px;
+}
