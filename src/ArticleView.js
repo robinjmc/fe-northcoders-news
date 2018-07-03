@@ -28,27 +28,27 @@ class ArticleView extends Component {
   postComment = (comment) => {
     const { article_id } = this.props.match.params
     comment.preventDefault();
-    console.log( JSON.stringify({comment: comment.target.elements['comment'].value}), 'hello')
+    console.log(JSON.stringify({ comment: comment.target.elements['comment'].value }), 'hello')
     fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`, {
       method: 'POST',
-      body: JSON.stringify({comment: comment.target.elements['comment'].value}),
+      body: JSON.stringify({ comment: comment.target.elements['comment'].value }),
       headers: {
         'content-type': 'application/json'
       }
     })
-    .then(res => {
-      return res.json()
-    })
-    .then(body => {
-      console.log(body)
-      this.setState({
-        commentStatus: 'posted'
+      .then(res => {
+        return res.json()
       })
-    })
+      .then(body => {
+        console.log(body)
+        this.setState({
+          commentStatus: 'posted'
+        })
+      })
   }
 
   refreshComplete = (status) => {
-    if(status === this.state.commentStatus){
+    if (status === this.state.commentStatus) {
       this.setState({
         commentStatus: ""
       })
@@ -61,29 +61,28 @@ class ArticleView extends Component {
     return (
       <div>
         {loading ? <p>Loading...</p> :
-        <div>
-        <div className="row" style={{ border: "2px solid", padding: "70px 0" }}>
-        </div>
-          <div className="row">
-            <div className="col-10 col-md-2"><FindUsername userId={article.created_by} /></div>
-            <div className="col" style={{ border: "2px solid", padding: "70px 0" }}>
-            <div className="row" style={{ border: "2px solid", padding: "30px 0", width: "60%", margin: "auto"  }}>
-            <h3 style={{border: "2px solid", padding: "30px 0", width: "60%", margin: "auto", textAlign:"center"}}>{article.title}</h3>
+          <div>
+            <div className="row" style={{ border: "2px solid", padding: "70px 0" }}>
             </div>
-            <div className="row" style={{ border: "2px solid", padding: "50px 0", width: "60%", margin: "auto"  }}>
-            
-            <p style={{border: "2px solid", padding: "30px 0", width: "90%", margin: "auto"}}>{article.body}</p>
+            <div className="row">
+              <div className="col-10 col-md-2"><FindUsername userId={article.created_by} /></div>
+              <div className="col" style={{ border: "2px solid", padding: "70px 0" }}>
+                <div className="row" style={{ border: "2px solid", padding: "30px 0", width: "60%", margin: "auto" }}>
+                  <h3 style={{ border: "2px solid", padding: "30px 0", width: "60%", margin: "auto", textAlign: "center" }}>{article.title}</h3>
+                </div>
+                <div className="row" style={{ border: "2px solid", padding: "50px 0", width: "60%", margin: "auto" }}>
+                  <p style={{ border: "2px solid", padding: "30px 0", width: "90%", margin: "auto" }}>{article.body}</p>
+                </div>
+              </div>
+              <div className="col-12 col-md-3" style={{ border: "2px solid", padding: "70px 0" }}></div>
             </div>
-            </div>
-            <div className="col-12 col-md-3" style={{ border: "2px solid", padding: "70px 0" }}></div>
-          </div>
           </div>
         }
         <Link to="/">return to feed</Link>
         {/* create return to correct topic functionality if possible */}
-        <CommentBox postComment={this.postComment}/>
+        <CommentBox postComment={this.postComment} />
         <h4>Comments</h4>
-        <ArticleComments article_id={article_id} commentStatus={this.state.commentStatus} refreshComplete={this.refreshComplete}/>
+        <ArticleComments article_id={article_id} commentStatus={this.state.commentStatus} refreshComplete={this.refreshComplete} />
       </div>
     );
   }

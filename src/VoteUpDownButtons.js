@@ -75,8 +75,8 @@ class VoteUpDownButtons extends Component {
                     <div style={{border: "2px solid", padding:"10px", margin: "auto", width: "50%"}}>
                         {/* <div className="row" style={{ padding: "15px" }}> */}
                         <div style={{ padding: "15px" }}></div>
-                            <button class={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
-                            <button class={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
+                            <button className={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
+                            <button className={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
                             <p style={{ padding: "15px", textAlign:"center" }}>{voteCount}</p>
                         {/* </div> */}
                     </div>

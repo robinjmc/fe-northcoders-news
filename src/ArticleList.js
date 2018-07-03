@@ -94,13 +94,13 @@ class ArticleList extends Component {
                         .sort(hottest)
                         .map(article => {
                             return (
-                                <div className="row">
+                                <div key={article._id} className="row">
                                     <div className="col" style={{ border: "2px solid" }}>
                                         <p></p>
                                     </div>
                                     <div className="col-12 col-md-8">
 
-                                        <div key={article._id} className="item">
+                                        <div className="item">
                                             <div className="row">
                                                 <div className="col-md-5">
                                                     <h4> </h4>

@@ -8,6 +8,41 @@ import Landing from './Landing';
 import UserArticles from "./UserArticles";
 import LoginBox from "./LoginBox";
 class News extends Component {
+
+  state = {
+    username: '',
+    userIds: [],
+    users: []
+  }
+  //would it make more sense for me to go back to the back end and make a api/users end point that shows all users?
+  componentDidMount() {
+    fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles`)
+    .then(res => {
+      return res.json() 
+    })
+    .then(articles => {
+      const {userIds} = this.state
+      articles.map(article => {
+        if(!userIds.includes(article.created_by)){
+          userIds.push(article.created_by)
+        }
+      })
+      //fetch api/users/userIds[0]
+    })
+    if(this.state.username.length > 0){
+      return localStorage.setItem("username", this.state.username)
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.username !== this.state.username){
+      return localStorage.setItem("username", this.state.username)
+    }
+  }
+
+  loginIn = (username) => {
+
+  }
   render() {
     return (
       <div>
@@ -16,7 +51,7 @@ class News extends Component {
             <div className="col-4" style={{margin: "auto", width: "50%" }}>
             <div className="row">
             <div className="col-10 col-md-1" ></div>
-            <div classname="col" style={{  width: "50%", float:"left" }}>
+            <div className="col" style={{  width: "50%", float:"left" }}>
                 <LoginBox />
               </div>
             </div>
