@@ -44,6 +44,9 @@ class NavBar extends Component {
             </Link>
           </div>
         </nav>
+        <div className="row articleCard" style={{ padding: "70px 0"}}>
+            <h1 style={{ margin: "auto"}}>The Conversation</h1>
+            </div>
       </div>
     );
   }

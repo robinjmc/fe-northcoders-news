@@ -59,29 +59,30 @@ class ArticleView extends Component {
     const { article_id } = this.props.match.params
     const { loading, article } = this.state;
     return (
-      <div>
+      <div className="articleBackground">
         {loading ? <p>Loading...</p> :
           <div>
-            <div className="row" style={{ border: "2px solid", padding: "70px 0" }}>
-            </div>
             <div className="row">
-              <div className="col-10 col-md-2"><FindUsername userId={article.created_by} /></div>
-              <div className="col" style={{ border: "2px solid", padding: "70px 0" }}>
-                <div className="row" style={{ border: "2px solid", padding: "30px 0", width: "60%", margin: "auto" }}>
-                  <h3 style={{ border: "2px solid", padding: "30px 0", width: "60%", margin: "auto", textAlign: "center" }}>{article.title}</h3>
+            {/* <div className="col-1" >
+              <p></p>
+                                    </div> */}
+              <div className="col-10 col-md-3"><FindUsername userId={article.created_by} /></div>
+              <div className="col-lg" style={{ padding: "70px 0" }}>
+                <div className="row articleCard" style={{  padding: "30px 0", width: "100%", margin: "auto" }}>
+                  <h3 style={{ padding: "30px 0", width: "90%", margin: "auto", textAlign: "center" }}>{article.title}</h3>
                 </div>
-                <div className="row" style={{ border: "2px solid", padding: "50px 0", width: "60%", margin: "auto" }}>
-                  <p style={{ border: "2px solid", padding: "30px 0", width: "90%", margin: "auto" }}>{article.body}</p>
+                <div className="row" style={{ padding: "1px 0"}}></div>
+                <div className="row articleCard" style={{ padding: "50px 0", width: "100%", margin: "auto" }}>
+                  <p style={{ padding: "30px 0", width: "90%", margin: "auto" }}>{article.body}</p>
                 </div>
               </div>
-              <div className="col-12 col-md-3" style={{ border: "2px solid", padding: "70px 0" }}></div>
+              <div className="col-12 col-md-1" style={{  padding: "70px 0" }}></div>
             </div>
           </div>
         }
         <Link to="/">return to feed</Link>
         {/* create return to correct topic functionality if possible */}
         <CommentBox postComment={this.postComment} />
-        <h4>Comments</h4>
         <ArticleComments article_id={article_id} commentStatus={this.state.commentStatus} refreshComplete={this.refreshComplete} />
       </div>
     );
