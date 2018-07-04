@@ -104,7 +104,6 @@ class ArticleList extends Component {
                                             <div className="row" style={{ padding: "3px 0" }}></div>
                                             <div className="row articleCard">
                                                 <div className="col-md-3">
-                                                    <h4></h4>
                                                     <FindUsername userId={article.created_by} />
                                                 </div>
 
