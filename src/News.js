@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 import NavBar from "./NavBar";
 import ArticleView from "./ArticleView";
@@ -7,46 +7,43 @@ import ArticleList from "./ArticleList"
 import Landing from './Landing';
 import UserArticles from "./UserArticles";
 import LoginBox from "./LoginBox";
+import PostArticle from "./PostArticle"
 
 import "./News.css"
 class News extends Component {
   state = {
     username: '',
-    userIds: [],
-    users: []
+    userId: ''
   }
-  //would it make more sense for me to go back to the back end and make a api/users end point that shows all users?
   componentDidMount() {
-    let userLocal = localStorage.getItem("username");
-    if (userLocal) {
+    let usernameLocal = localStorage.getItem("username");
+    let userIdLocal = localStorage.getItem("id");
+    if (usernameLocal && userIdLocal) {
       this.setState({
-        username: userLocal
+        username: usernameLocal,
+        userId: userIdLocal
       })
     }
-    fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles`)
+    fetch(`https://robin-pt-nc-news.herokuapp.com/api/users`)
       .then(res => {
         return res.json()
       })
-      .then(articles => {
-        const { userIds } = this.state
-        articles.map(article => {
-          if (!userIds.includes(article.created_by)) {
-            userIds.push(article.created_by)
-            fetch(`https://robin-pt-nc-news.herokuapp.com/api/users/${article.created_by}`)
-              .then(res => { //stop doing nested then blocks robin!!!
-                return res.json()
-              })
-              .then(userData => {
-                this.state.users.push(userData)
-              })
-          }
+      .then(({ users }) => {
+        console.log(users)
+        this.setState({
+          users: users
         })
       })
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { username, userId } = this.state
     if (prevState.username !== this.state.username) {
-      return localStorage.setItem("username", this.state.username)
+      function populateStorage(username, userId) {
+        localStorage.setItem("username", username)
+        localStorage.setItem("id", userId)
+      }
+      return populateStorage(username, userId)
     }
   }
 
@@ -57,36 +54,50 @@ class News extends Component {
     })
     if (userExists[0]) {
       this.setState({
-        username: username.target.elements['username'].value
+        username: username.target.elements['username'].value,
+        userId: userExists[0]._id
       })
     }
   }
 
   logOut = () => {
     this.setState({
-      username: ''
+      username: '',
+      userId: ''
     })
     return localStorage.clear()
   }
 
+  postArticle = (userId) => {
+
+  }
+
   render() {
     let { username } = this.state;
-//fixed-top
     return (
-      <div> 
+      <div>
         <header>
           <div className="row">
-            <div className="col" >
+            <div className="col">
               <div className="row">
               </div>
             </div>
-            <div className="col-12 col-md-7" >
+            <div className="col-12 col-md-7">
               <img className="img-fluid" src="https://northcoders.com/images/logos/learn_to_code_manchester_original_second.png" alt="Northcoders" />
             </div>
             <div className="col">
-            <div className="loginout">
-              {username.length ? <div> <h3>{username}</h3> <button type="button" onClick={this.logOut}>Logout</button> </div> : <LoginBox logIn={this.logIn} />}
-            </div>
+              <div className="loginout">
+                {username.length ? <div> 
+                  <h3>{username}</h3> 
+                  <button type="button" onClick={this.logOut}>Logout</button> 
+                  <Link to='/topic/new_article'>
+                    <h3>join the conversation</h3>
+                  </Link>
+                  </div> : <LoginBox logIn={this.logIn} />}
+                <div>
+                  
+                </div>
+              </div>
             </div>
           </div>
           <NavBar />
@@ -96,6 +107,8 @@ class News extends Component {
         <Route exact path="/:topicSlug" component={ArticleList} />
         <Route exact path="/articles/:article_id" component={ArticleView} />
         <Route exact path="/users/:user_id" component={UserArticles} />
+        <Route exact path="/topic/new_article" component={PostArticle}/>
+        {/* // component={UserArticles thingIwanttoPass=this.state.users} */}
 
       </div>
 

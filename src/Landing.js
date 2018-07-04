@@ -63,7 +63,7 @@ class Landing extends Component {
                                                 <div className="col-md-8" style={{ padding: "70px 0", margin: "auto" }}>
                                                     <div>
                                                         <h3 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>
-                                                            <i class="far fa-comments fa-lg"></i>
+                                                            <i className="far fa-comments fa-lg"></i>
                                                             {article.comment_count}
                                                         </h3>
                                                     </div>
