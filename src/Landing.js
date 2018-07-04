@@ -42,7 +42,7 @@ class Landing extends Component {
             }
         }
         return (
-            <div className="background">
+            <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> : articles
                         .sort(hottest)

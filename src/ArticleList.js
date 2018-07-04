@@ -89,7 +89,7 @@ class ArticleList extends Component {
             return 0
         }
         return (
-            <div className="background">
+            <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> : articles
                         .sort(hottest)
@@ -100,8 +100,7 @@ class ArticleList extends Component {
                                         <p></p>
                                     </div>
                                     <div className="col-12 col-md-8 ">
-
-                                        <div className="item background" >
+                                        <div className="item articleBackground" >
                                             <div className="row" style={{ padding: "3px 0" }}></div>
                                             <div className="row articleCard">
                                                 <div className="col-md-3">

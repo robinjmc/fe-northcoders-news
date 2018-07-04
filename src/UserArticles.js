@@ -3,6 +3,8 @@ import addDefaultSrc from './ImgLinkBroken';
 import { Link } from "react-router-dom";
 import VoteUpDownButtons from "./VoteUpDownButtons"
 
+
+
 class UserArticles extends Component {
     state = {
         articles: null,
@@ -34,7 +36,7 @@ class UserArticles extends Component {
     render() {
         const { loading, user, articles } = this.state;
         return (
-            <div>
+            <div className="articleBackground">
                 {loading ? <p>Loading...</p> :
                     <div>
                         <h1>{user.name}</h1>
@@ -44,20 +46,28 @@ class UserArticles extends Component {
                         }).map(article => {
                             //could create a 'in' element that says the topic each article is in
                             return (
-                                <div class="container" >
+                                <div class="container" key={article._id}>
                                     <div className="row">
-                                        {/* <div className="col" style={{ border: "2px solid" }}>
-                                        </div> */}
+                                        <div className="col" style={{ border: "2px solid" }}>
+                                            <p></p>
+                                        </div>
                                         <div className="col-12 col-md-8">
                                             <div class="container" >
-                                                <div className="row">
-                                                    <div key={article._id} className="item">
-                                                        
-                                                        <div className="col-sm" style={{ border: "2px solid" }}>
+                                                <div className="row" style={{ padding: "3px 0" }}></div>
+
+                                                <div className="row articleCard">
+                                                    <div className="item">
+                                                        <div className="col-md-3"></div>
+
+                                                        <div className="col-md-8" style={{ padding: "70px 0", margin: "auto", border: "2px solid" }}>
+                                                            <h3 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>
+                                                                <i class="far fa-comments fa-lg"></i>
+                                                                {article.comment_count}
+                                                            </h3>
                                                             <div style={{
                                                                 textAlign: "right",
                                                                 margin: "auto",
-                                                                width: "70%",
+                                                                width: "100%",
                                                                 padding: "10px",
                                                                 border: "2px solid"
                                                             }}>
@@ -66,18 +76,24 @@ class UserArticles extends Component {
                                                                 </Link>
                                                                 <h4>by {user.username}</h4>
                                                             </div>
+                                                            <div style={{ padding: "15px", float: "right", textAlign: "right" }}>
+                                                                <h4>{article.body.slice(0, 60)}...</h4>
+                                                            </div>
                                                         </div>
-                                                        <div className="col-sm" style={{ border: "2px solid" }}>
-                                                            <p>Comments: {article.comment_count}</p>
+
+                                                        <div className="col" style={{ margin: "auto", width: "100%", textAlign: "center", padding: "70px 0", border: "2px solid" }}>
+
                                                             <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div className="row" style={{ padding: "3px 0" }}></div>
                                             </div>
                                         </div>
-                                        {/* <div className="col" style={{ border: "2px solid" }}>
+                                        <div className="col" style={{ border: "2px solid" }}>
                                             <p></p>
-                                        </div> */}
+                                        </div>
                                     </div>
                                 </div>
                             )
