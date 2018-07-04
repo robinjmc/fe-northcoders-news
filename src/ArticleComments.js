@@ -54,43 +54,37 @@ class ArticleComments extends Component {
             return 0
         }
         return (
-            <div>
+            <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> :
                         comments.sort(mostRecent).map(comment => {
                             return (
                                 <div key={comment._id} className="row">
-                                    <div className="col-2" style={{ border: "2px solid" }}>
+                                    <div className="col-3" >
                                         <p></p>
                                     </div>
-                                    <div className="col-12 col-md-7">
-                                        <div key={comment._id} className="item">
-                                            <div className="row">
-                                                <div className="col" style={{ margin: "auto", padding: "70px 0", textAlign: "center", border: "2px solid" }}>
-                                                    <div className="row" style={{ border: "1px solid", width: "60%", margin: "auto" }}>
-                                                        <div className="col-12 col-md-4" >
+                                    <div className="col-12 col-lg-8 " >
+                                        <div key={comment._id} className="item" >
+                                        <div className="row" style={{ padding: "3px 0" }}></div>
+                                            <div className="row articleCard">
+                                                <div className="col" style={{ margin: "auto", textAlign: "center"}}>
+                                                    <div className="row" >
+                                                        <div className="col-12 col-md-3" >
                                                             <div>
                                                                 <FindUsername userId={comment.created_by} />
                                                             </div>
                                                         </div>
-                                                        <div className="col" style={{ border: "2px solid", padding: "70px 0" }}>
-                                                            <p style={{ border: "2px solid", padding: "70px 0" }}>{comment.body}</p>
+                                                        <div className="col-lg" style={{ padding: "100px 0" }}>
+                                                            <p style={{  padding: "100px 0" }}>{comment.body}</p>
                                                         </div>
-                                                        <div className="col-12 col-md-3" style={{ margin: "auto", width: "50%", textAlign: "center", border: "2px solid" }}>
-
-                                                <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'} />
-                                            </div>
+                                                        <div className="col-2" style={{ margin: "auto", width: "100%", textAlign: "center" }}>
+                                                            <VoteUpDownButtons voteCount={comment.votes} _id={comment._id} type={'comments'} />
+                                                        </div>
                                                     </div>
-                                                    
                                                 </div>
-                                                
-                                            
                                             </div>
-                                            
                                         </div>
-                                    </div>
-                                    <div className="col-2" style={{ border: "2px solid" }}>
-                                        <p></p>
+                                        <div className="row" style={{ padding: "3px 0" }}></div>
                                     </div>
                                 </div>
                             )
