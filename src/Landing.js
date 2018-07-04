@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import VoteUpDownButtons from "./VoteUpDownButtons";
 import FindUsername from "./FindUsername"
 
+import "./ArticleList.css"
+
 class Landing extends Component {
     state = {
         articles: null,
@@ -40,30 +42,50 @@ class Landing extends Component {
             }
         }
         return (
-            <div>
+            <div className="background">
                 {
                     loading ? <p>Loading...</p> : articles
                         .sort(hottest)
                         .map(article => {
                             return (
                                 <div key={article._id} className="row">
-                                    <div className="col" style={{ border: "2px solid" }}>
+                                    <div className="col" >
                                         <p></p>
                                     </div>
                                     <div className="col-12 col-md-8">
-                                        <div key={article._id} className="item" style={{ border: "2px solid" }}>
-                                            <Link to={`/articles/${article._id}`}>
-                                                <h3>{article.title}</h3>
-                                            </Link>
-                                            <h4>by</h4>
-                                            <FindUsername userId={article.created_by} />
-                                            <p>Comments: {article.comment_count}</p>
-                                            <div style={{ margin: "auto", width: "50%", textAlign: "center", border: "2px solid" }}>
-                                                <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+
+                                        <div className="item" >
+                                            <div className="row" style={{ padding: "3px 0" }}></div>
+                                            <div className="row articleCard" style={{ padding: "3px 0" }}>
+                                                <div className="col-md-3">
+                                                    <FindUsername userId={article.created_by} />
+                                                </div>
+                                                <div className="col-md-8" style={{ padding: "70px 0", margin: "auto" }}>
+                                                    <div>
+                                                        <h3 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>
+                                                            <i class="far fa-comments fa-lg"></i>
+                                                            {article.comment_count}
+                                                        </h3>
+                                                    </div>
+                                                    <div style={{ textAlign: "right", margin: "auto",  width: "100%", padding: "10px"}}>
+                                                        <Link to={`/articles/${article._id}`}>
+                                                            <h3>{article.title}</h3>
+                                                        </Link>
+                                                    </div>
+                                                    <div style={{ padding: "15px", float: "right", textAlign: "right" }}>
+                                                        <h4>{article.body.slice(0, 60)}...</h4>
+                                                    </div>
+
+                                                </div>
+                                                <div className="col" style={{ padding: "70px 0", margin: "auto", width: "100%", textAlign: "center" }}>
+                                                    <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
+                                                </div>
                                             </div>
+                                            <div className="row" style={{ padding: "3px 0" }}></div>
                                         </div>
+
                                     </div>
-                                    <div className="col" style={{ border: "2px solid" }}>
+                                    <div className="col" >
                                         <p></p>
                                     </div>
                                 </div>
