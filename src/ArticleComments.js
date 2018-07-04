@@ -74,7 +74,7 @@ class ArticleComments extends Component {
                                                                 <FindUsername userId={comment.created_by} />
                                                             </div>
                                                         </div>
-                                                        <div className="col-lg" style={{ padding: "100px 0" }}>
+                                                        <div className="col-lg" style={{ padding: "30px 0" }}>
                                                             <p style={{  padding: "100px 0" }}>{comment.body}</p>
                                                         </div>
                                                         <div className="col-2" style={{ margin: "auto", width: "100%", textAlign: "center" }}>

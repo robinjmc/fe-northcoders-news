@@ -110,7 +110,7 @@ class ArticleList extends Component {
                                                 <div className="col-md-8" style={{ padding: "70px 0", margin: "auto" }}>
                                                     <div>
                                                         <h3 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>
-                                                            <i class="far fa-comments fa-lg"></i>
+                                                            <i class="far fa-comments fa-lg"> </i>
                                                             {articles_comments.filter(comment => comment._id === article._id)[0].comment_count}
                                                         </h3>
                                                     </div>
