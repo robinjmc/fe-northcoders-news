@@ -45,6 +45,9 @@ class News extends Component {
       }
       return populateStorage(username, userId)
     }
+    if(username.length === 0){
+      return localStorage.clear();
+    }
   }
 
   logIn = (username) => {
@@ -68,12 +71,9 @@ class News extends Component {
     return localStorage.clear()
   }
 
-  postArticle = (userId) => {
-
-  }
-
   render() {
-    let { username } = this.state;
+    let { username, userId } = this.state;
+    console.log(userId)
     return (
       <div>
         <header>
@@ -89,8 +89,10 @@ class News extends Component {
               <div className="loginout">
                 {username.length ? <div> 
                   <h3>{username}</h3> 
-                  <button type="button" onClick={this.logOut}>Logout</button> 
-                  <Link to='/topic/new_article'>
+                  <Link to={'/'}>
+                  <button type="button" onClick={this.logOut}>Logout</button>
+                  </Link>
+                  <Link to={`/users/${userId}/new_article`} params={{userId: userId}}>
                     <h3>join the conversation</h3>
                   </Link>
                   </div> : <LoginBox logIn={this.logIn} />}
@@ -107,7 +109,7 @@ class News extends Component {
         <Route exact path="/:topicSlug" component={ArticleList} />
         <Route exact path="/articles/:article_id" component={ArticleView} />
         <Route exact path="/users/:user_id" component={UserArticles} />
-        <Route exact path="/topic/new_article" component={PostArticle}/>
+        <Route exact path="/users/:user_id/new_article" component={PostArticle}/>
         {/* // component={UserArticles thingIwanttoPass=this.state.users} */}
 
       </div>

@@ -26,6 +26,9 @@ class NavBar extends Component {
     const { loading, topics } = this.state
     return (
       <div>
+        <div className="row articleCard" id="newsHead">
+            <h1 style={{ margin: "auto"}}>News</h1>
+            </div>
         <nav className="navBar navbar navbar-fluid navbar-dark bg-dark" >
           {
             loading ? <p>Loading...</p> : topics.map(topic => {
@@ -44,9 +47,7 @@ class NavBar extends Component {
             </Link>
           </div>
         </nav>
-        <div className="row articleCard" style={{ padding: "70px 0"}}>
-            <h1 style={{ margin: "auto"}}>The Conversation</h1>
-            </div>
+        
       </div>
     );
   }

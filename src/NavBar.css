@@ -1,3 +1,9 @@
 .navBar {
     height:100px;
 }
+
+#newsHead {
+    padding-top: 0px;
+    padding-bottom: 50px;
+    font-style: italic;
+}
