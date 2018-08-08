@@ -23,6 +23,14 @@ class ArticleView extends Component {
           loading: false
         })
       })
+      .catch(err => {
+        if (err.status === 404) {
+          this.setState({
+            error: true,
+            loading: false
+          })
+        }
+      })
   }
 
   postComment = (comment) => {
@@ -61,6 +69,7 @@ class ArticleView extends Component {
     return (
       <div className="articleBackground">
         {loading ? <p>Loading...</p> :
+        // <Error/>
           <div>
             <div className="row">
             {/* <div className="col-1" >

@@ -13,14 +13,7 @@ class UserArticles extends Component {
         userId: ''
     }
     componentDidMount() {
-        // let usernameView = localStorage.getItem("viewUsername");
-        // let userIdView = localStorage.getItem("viewId");
-        // const { user_id } = this.props.match.params
-        let {userId} = this.state
-        this.setState({
-            userId: localStorage.getItem("viewId")
-          })
-        console.log(typeof localStorage.getItem("viewId"))
+        const { username } = this.props.match.params
         fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles`)
             .then(res => {
                 return res.json()
@@ -29,29 +22,27 @@ class UserArticles extends Component {
                 this.setState({
                     articles: articles
                 })
-                console.log(articles, localStorage)
-                return fetch(`https://robin-pt-nc-news.herokuapp.com/api/users/${userId}`)
+                return fetch(`https://robin-pt-nc-news.herokuapp.com/api/users`)
             })
             .then(res => {
                 return res.json()
             })
-            .then(user => {
-                console.log(user, localStorage)
+            .then(({ users }) => {
+                console.log(users)
+                let user = users.find(user => user.username === username)
                 this.setState({
                     user: user,
+                    userId: user._id,
                     loading: false
                 })
             })
     }
     render() {
         const { loading, articles, userId } = this.state;
-        // let userIdView = localStorage.getItem("viewId");
-        console.log(localStorage, userId)
         return (
             <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> : articles.filter(article => {
-                        console.log(article.created_by, userId)
                         return article.created_by === userId
                     })
                         .map(article => {
@@ -61,7 +52,6 @@ class UserArticles extends Component {
                                         <p></p>
                                     </div>
                                     <div className="col-12 col-md-8">
-
                                         <div className="item" >
                                             <div className="row" style={{ padding: "3px 0" }}></div>
                                             <div className="row articleCard" style={{ padding: "3px 0" }}>
@@ -71,7 +61,7 @@ class UserArticles extends Component {
                                                 <div className="col-md-8" style={{ padding: "70px 0", margin: "auto" }}>
                                                     <div>
                                                         <h3 style={{ padding: "10px", margin: "auto", textAlign: "right" }}>
-                                                            <i class="far fa-comments fa-lg"></i>
+                                                            <i className="far fa-comments fa-lg"></i>
                                                             {article.comment_count}
                                                         </h3>
                                                     </div>
@@ -83,7 +73,6 @@ class UserArticles extends Component {
                                                     <div style={{ padding: "15px", float: "right", textAlign: "right" }}>
                                                         <h4>{article.body.slice(0, 60)}...</h4>
                                                     </div>
-
                                                 </div>
                                                 <div className="col" style={{ padding: "70px 0", margin: "auto", width: "100%", textAlign: "center" }}>
                                                     <VoteUpDownButtons voteCount={article.votes} _id={article._id} type={'articles'} />
@@ -91,7 +80,6 @@ class UserArticles extends Component {
                                             </div>
                                             <div className="row" style={{ padding: "3px 0" }}></div>
                                         </div>
-
                                     </div>
                                     <div className="col" >
                                         <p></p>
