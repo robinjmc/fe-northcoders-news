@@ -13,15 +13,23 @@ import "./News.css"
 class News extends Component {
   state = {
     username: '',
-    userId: ''
+    userId: '',
+    viewId: '',
+    view: ''
   }
   componentDidMount() {
-    let usernameLocal = localStorage.getItem("username");
-    let userIdLocal = localStorage.getItem("id");
+    let usernameLocal = localStorage.getItem("loggedUsername");
+    let userIdLocal = localStorage.getItem("loggedId");
+    let viewIdLocal = localStorage.getItem("viewId");
     if (usernameLocal && userIdLocal) {
       this.setState({
         username: usernameLocal,
         userId: userIdLocal
+      })
+    }
+    if(viewIdLocal){
+      this.setState({
+        viewId: viewIdLocal
       })
     }
     fetch(`https://robin-pt-nc-news.herokuapp.com/api/users`)
@@ -29,7 +37,6 @@ class News extends Component {
         return res.json()
       })
       .then(({ users }) => {
-        console.log(users)
         this.setState({
           users: users
         })
@@ -37,16 +44,36 @@ class News extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { username, userId } = this.state
+    const { username, userId, viewId } = this.state
     if (prevState.username !== this.state.username) {
       function populateStorage(username, userId) {
-        localStorage.setItem("username", username)
-        localStorage.setItem("id", userId)
+        localStorage.setItem("loggedUsername", username)
+        localStorage.setItem("loggedId", userId)
       }
       return populateStorage(username, userId)
     }
     if(username.length === 0){
       return localStorage.clear();
+    }
+    if(prevState.viewId !== viewId){
+      function populateStorage(id) {
+        localStorage.setItem("viewId", userId)
+      }
+      return populateStorage(viewId)
+    }
+  }
+
+  viewId = (id) => {
+    let {viewId} = this.state
+    if(viewId.length ){
+      this.setState({
+        view: 'user viewed!'
+      })
+      return viewId
+    } else {
+      this.setState({
+        view: 'new user viewed!'
+      })
     }
   }
 
@@ -73,7 +100,6 @@ class News extends Component {
 
   render() {
     let { username, userId } = this.state;
-    console.log(userId)
     return (
       <div>
         <header>
@@ -92,7 +118,7 @@ class News extends Component {
                   <Link to={'/'}>
                   <button type="button" onClick={this.logOut}>Logout</button>
                   </Link>
-                  <Link to={`/users/${userId}/new_article`} params={{userId: userId}}>
+                  <Link to={`/users/${username}/new_article`}>
                     <h3>join the conversation</h3>
                   </Link>
                   </div> : <LoginBox logIn={this.logIn} />}
@@ -105,11 +131,11 @@ class News extends Component {
           <NavBar />
         </header>
 
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/:topicSlug" component={ArticleList} />
-        <Route exact path="/articles/:article_id" component={ArticleView} />
-        <Route exact path="/users/:user_id" component={UserArticles} />
-        <Route exact path="/users/:user_id/new_article" component={PostArticle}/>
+        <Route exact path="/" component={Landing} viewId={this.viewId} />
+        <Route exact path="/:topicSlug" component={ArticleList} viewId={this.viewId}/>
+        <Route exact path="/articles/:article_id" component={ArticleView} viewId={this.viewId}/>
+        <Route exact path="/users/:username" component={UserArticles} viewId={this.viewId}/>
+        <Route exact path="/users/:username/new_article" component={PostArticle}/>
         {/* // component={UserArticles thingIwanttoPass=this.state.users} */}
 
       </div>

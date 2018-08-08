@@ -53,7 +53,7 @@ class PostArticle extends Component {
 
     postArticle = (article) => {
         article.preventDefault();
-        const { user_id } = this.props.match.params;
+        const userId = localStorage.getItem("loggedId");
         const {topicChoice} = this.state;
         console.log(topicChoice, article.target.elements['articleContent'].value, 'hello')
         fetch(`https://robin-pt-nc-news.herokuapp.com/api/topics/${topicChoice}/articles`, {
@@ -61,7 +61,7 @@ class PostArticle extends Component {
             body: JSON.stringify({
                 title: article.target.elements['articleTitle'].value ,
                 body: article.target.elements['articleContent'].value ,
-                user: user_id
+                user: userId
             }),
             headers: {
                 'content-type': 'application/json'
@@ -82,7 +82,8 @@ class PostArticle extends Component {
 
     render() {
         const { articleContent, loading, topics, topicChoice, articleTitle } = this.state;
-        // const { user_id } = this.props.match.params;
+        const { user_id } = this.props.match.params;
+        console.log(this.props.match)
         let isContent = articleContent.length;
         let isTopic = topicChoice.length;
         let isTitle = articleTitle.length;

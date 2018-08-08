@@ -20,6 +20,10 @@ class FindUsername extends Component {
                 })
             })
     }
+    viewUser = (username, id) => {
+        localStorage.setItem("viewUsername", username)
+        localStorage.setItem("viewId", id)
+    }
     render() {
         const { loading, user } = this.state
         const { userId } = this.props
@@ -31,8 +35,8 @@ class FindUsername extends Component {
                             <div className="col-10 col-md-2">
                             </div>
                             <div className="col" style={{ padding: "0px 0", margin: "auto", width: "100%" }}>
-                            <Link to={`/users/${userId}`}>
-                                <h5>{user.name}</h5>
+                            <Link to={`/users/${user.username}`}>
+                                <button style={{ backgroundColor: "white",fontSize:"100%", fontFamily:"inherit", border:"0", padding:"0", color:"inherit"}} type="button" onClick={this.viewUser(user.username, user._id)}><h5>{user.name}</h5></button>
                             </Link>
                             <img className="img-fluid" style={{ 
                                 width: "100%",

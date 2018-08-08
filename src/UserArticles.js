@@ -9,10 +9,18 @@ class UserArticles extends Component {
     state = {
         articles: null,
         loading: true,
-        user: null
+        user: null,
+        userId: ''
     }
     componentDidMount() {
-        const { user_id } = this.props.match.params
+        // let usernameView = localStorage.getItem("viewUsername");
+        // let userIdView = localStorage.getItem("viewId");
+        // const { user_id } = this.props.match.params
+        let {userId} = this.state
+        this.setState({
+            userId: localStorage.getItem("viewId")
+          })
+        console.log(typeof localStorage.getItem("viewId"))
         fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles`)
             .then(res => {
                 return res.json()
@@ -21,12 +29,14 @@ class UserArticles extends Component {
                 this.setState({
                     articles: articles
                 })
-                return fetch(`https://robin-pt-nc-news.herokuapp.com/api/users/${user_id}`)
+                console.log(articles, localStorage)
+                return fetch(`https://robin-pt-nc-news.herokuapp.com/api/users/${userId}`)
             })
             .then(res => {
                 return res.json()
             })
             .then(user => {
+                console.log(user, localStorage)
                 this.setState({
                     user: user,
                     loading: false
@@ -34,13 +44,15 @@ class UserArticles extends Component {
             })
     }
     render() {
-        const { loading, articles } = this.state;
-        // user
+        const { loading, articles, userId } = this.state;
+        // let userIdView = localStorage.getItem("viewId");
+        console.log(localStorage, userId)
         return (
             <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> : articles.filter(article => {
-                        return article.created_by === this.props.match.params.user_id
+                        console.log(article.created_by, userId)
+                        return article.created_by === userId
                     })
                         .map(article => {
                             return (

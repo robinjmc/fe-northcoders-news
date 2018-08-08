@@ -57,6 +57,8 @@ class ArticleComments extends Component {
             <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> :
+                    comments.length > 0 ?
+                        <div>{
                         comments.sort(mostRecent).map(comment => {
                             return (
                                 <div key={comment._id} className="row">
@@ -88,7 +90,10 @@ class ArticleComments extends Component {
                                     </div>
                                 </div>
                             )
-                        })
+                        })}
+                        </div> :
+                        <div>Be the first to Comment!</div>
+                    
                 }
             </div>
         )

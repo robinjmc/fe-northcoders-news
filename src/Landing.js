@@ -11,6 +11,7 @@ class Landing extends Component {
         loading: true
     };
     componentDidMount() {
+        console.log(this.props)
         fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/`)
             .then(res => {
                 return res.json()
