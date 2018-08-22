@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { putVote } from "./Api"
 
 import "./VoteUpDown.css"
 
@@ -18,10 +19,11 @@ class VoteUpDownButtons extends Component {
         const { value } = upDown.target
         const { _id, type } = this.props
         const { UpOrDown, voteCount } = this.state
-        if (value !== UpOrDown) {
-            fetch(`https://robin-pt-nc-news.herokuapp.com/api/${type}/${_id}?vote=${value}`, {
-                method: 'put'
-            })
+        if (value !== UpOrDown) {      
+            // fetch(`https://robin-pt-nc-news.herokuapp.com/api/${type}/${_id}?vote=${value}`, {
+            //     method: 'put'
+            // })
+            putVote(type, _id, value)
                 .then(res => {
                     return res.json()
                 })

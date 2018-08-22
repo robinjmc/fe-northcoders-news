@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link } from "react-router-dom";
-
 import NavBar from "./NavBar";
 import ArticleView from "./ArticleView";
 import ArticleList from "./ArticleList"
@@ -8,31 +7,24 @@ import Landing from './Landing';
 import UserArticles from "./UserArticles";
 import LoginBox from "./LoginBox";
 import PostArticle from "./PostArticle"
+import { getAllUsers } from "./Api"
 
 import "./News.css"
 class News extends Component {
   state = {
     username: '',
     userId: ''
-    // viewId: '',
-    // view: ''
   }
   componentDidMount() {
     let usernameLocal = localStorage.getItem("loggedUsername");
     let userIdLocal = localStorage.getItem("loggedId");
-    // let viewIdLocal = localStorage.getItem("viewId");
     if (usernameLocal && userIdLocal) {
       this.setState({
         username: usernameLocal,
         userId: userIdLocal
       })
     }
-    // if(viewIdLocal){
-    //   this.setState({
-    //     viewId: viewIdLocal
-    //   })
-    // }
-    fetch(`https://robin-pt-nc-news.herokuapp.com/api/users`)
+    getAllUsers()
       .then(res => {
         return res.json()
       })
@@ -44,7 +36,7 @@ class News extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { username, userId, viewId } = this.state
+    const { username, userId } = this.state
     if (prevState.username !== this.state.username) {
       function populateStorage(username, userId) {
         localStorage.setItem("loggedUsername", username)
@@ -55,27 +47,7 @@ class News extends Component {
     if(username.length === 0){
       return localStorage.clear();
     }
-    // if(prevState.viewId !== viewId){
-    //   function populateStorage(id) {
-    //     localStorage.setItem("viewId", userId)
-    //   }
-    //   return populateStorage(viewId)
-    // }
   }
-
-  // viewId = (id) => {
-  //   let {viewId} = this.state
-  //   if(viewId.length ){
-  //     this.setState({
-  //       view: 'user viewed!'
-  //     })
-  //     return viewId
-  //   } else {
-  //     this.setState({
-  //       view: 'new user viewed!'
-  //     })
-  //   }
-  // }
 
   logIn = (username) => {
     username.preventDefault();
@@ -99,7 +71,7 @@ class News extends Component {
   }
 
   render() {
-    let { username, userId } = this.state;
+    let { username } = this.state;
     return (
       <div>
         <header>

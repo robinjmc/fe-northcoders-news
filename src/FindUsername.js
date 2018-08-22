@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import addDefaultSrc from './ImgLinkBroken';
 import { Link } from "react-router-dom";
+import { getUserById } from "./Api"
 
 class FindUsername extends Component {
     state = {
@@ -9,7 +10,7 @@ class FindUsername extends Component {
     }
     componentDidMount() {
         const { userId } = this.props
-        fetch(`https://robin-pt-nc-news.herokuapp.com/api/users/${userId}`)
+        getUserById(userId)
             .then(res => {
                 return res.json()
             })
@@ -19,14 +20,10 @@ class FindUsername extends Component {
                     loading: false
                 })
             })
-    }
-    viewUser = (username, id) => {
-        localStorage.setItem("viewUsername", username)
-        localStorage.setItem("viewId", id)
+            .catch(console.log)
     }
     render() {
         const { loading, user } = this.state
-        const { userId } = this.props
         return (
             <div>
                 {
@@ -36,7 +33,7 @@ class FindUsername extends Component {
                             </div>
                             <div className="col" style={{ padding: "0px 0", margin: "auto", width: "100%" }}>
                             <Link to={`/users/${user.username}`}>
-                                <button style={{ backgroundColor: "white",fontSize:"100%", fontFamily:"inherit", border:"0", padding:"0", color:"inherit"}} type="button" onClick={this.viewUser(user.username, user._id)}><h5>{user.name}</h5></button>
+                                <h5>{user.name}</h5>
                             </Link>
                             <img className="img-fluid" style={{ 
                                 width: "100%",
@@ -44,7 +41,6 @@ class FindUsername extends Component {
                                 borderRadius: "50%"
                             }} onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
                             </div>
-                            
                             <div className="col-10 col-md-2" >
                             </div>
                         </div>

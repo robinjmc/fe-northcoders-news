@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FindUsername from './FindUsername'
 import VoteUpDownButtons from './VoteUpDownButtons'
+import {getAllCommentsByArticle} from './Api'
 
 class ArticleComments extends Component {
     state = {
@@ -10,7 +11,7 @@ class ArticleComments extends Component {
 
     componentDidMount() {
         const { article_id } = this.props
-        fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
+        getAllCommentsByArticle(article_id)
             .then(res => {
                 return res.json()
             })
@@ -20,12 +21,13 @@ class ArticleComments extends Component {
                     loading: false
                 })
             })
+            .catch(console.log)
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { article_id, commentStatus, refreshComplete } = this.props
         if (prevProps !== this.props && commentStatus === 'posted') {
-            fetch(`https://robin-pt-nc-news.herokuapp.com/api/articles/${article_id}/comments`)
+            getAllCommentsByArticle(article_id)
                 .then(res => {
                     return res.json()
                 })
