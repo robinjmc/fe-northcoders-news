@@ -43,20 +43,10 @@ class Landing extends Component {
     render() {
         const { loading, articles, error, errorStatus, errorType } = this.state
         let hottest = function (a, b) {
-            if (a.comment_count > b.comment_count) {
-                return -1
-            }
-            if (a.comment_count < b.comment_count) {
-                return 1
-            }
-            if (a.comment_count === b.comment_count) {
-                if (a.votes > b.votes) {
-                    return -1
-                }
-                if (a.votes < b.votes) {
-                    return 1
-                }
-                return 0
+            if (a.comment_count - b.comment_count > 0 || a.comment_count - b.comment_count < 0) {
+                return a.comment_count - b.comment_count
+            } else {
+                return a.votes - b.votes
             }
         }
         return (
