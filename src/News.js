@@ -8,29 +8,34 @@ import UserArticles from "./UserArticles";
 import LoginBox from "./LoginBox";
 import PostArticle from "./PostArticle"
 import { getAllUsers } from "./Api"
+import { populateStorage } from "./Utils"
 
 import "./News.css"
 class News extends Component {
   state = {
     username: '',
-    userId: ''
+    userId: '',
+    users: []
   }
   componentDidMount() {
     let usernameLocal = localStorage.getItem("loggedUsername");
     let userIdLocal = localStorage.getItem("loggedId");
+    let username = '';
+    let userId = '';
     if (usernameLocal && userIdLocal) {
-      this.setState({
-        username: usernameLocal,
-        userId: userIdLocal
-      })
+      username = usernameLocal
+      userId = userIdLocal
     }
     getAllUsers()
       .then(res => {
         return res.json()
       })
       .then(({ users }) => {
+        console.log(users)
         this.setState({
-          users: users
+          users: users,
+          username: username,
+          userId: userId
         })
       })
   }
@@ -38,26 +43,22 @@ class News extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { username, userId } = this.state
     if (prevState.username !== this.state.username) {
-      function populateStorage(username, userId) {
-        localStorage.setItem("loggedUsername", username)
-        localStorage.setItem("loggedId", userId)
-      }
       return populateStorage(username, userId)
     }
-    if(username.length === 0){
+    if(username.length === 0) {
       return localStorage.clear();
     }
   }
 
   logIn = (username) => {
     username.preventDefault();
-    const userExists = this.state.users.filter(user => {
+    const userExists = this.state.users.find(user => {
       return user.username === username.target.elements['username'].value
     })
-    if (userExists[0]) {
+    if (userExists) {
       this.setState({
         username: username.target.elements['username'].value,
-        userId: userExists[0]._id
+        userId: userExists._id
       })
     }
   }
@@ -95,23 +96,19 @@ class News extends Component {
                   </Link>
                   </div> : <LoginBox logIn={this.logIn} />}
                 <div>
-                  
                 </div>
               </div>
             </div>
           </div>
           <NavBar />
         </header>
-
         <Route exact path="/" component={Landing}  />
         <Route exact path="/:topicSlug" component={ArticleList} />
         <Route exact path="/articles/:article_id" component={ArticleView} />
         <Route exact path="/users/:username" component={UserArticles} />
         <Route exact path="/users/:username/new_article" component={PostArticle}/>
         {/* // component={UserArticles thingIwanttoPass=this.state.users} */}
-
       </div>
-
     );
   }
 }
