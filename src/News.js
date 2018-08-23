@@ -3,7 +3,6 @@ import { Route, Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import ArticleView from "./ArticleView";
 import ArticleList from "./ArticleList"
-import Landing from './Landing';
 import UserArticles from "./UserArticles";
 import LoginBox from "./LoginBox";
 import PostArticle from "./PostArticle"
@@ -102,7 +101,7 @@ class News extends Component {
           </div>
           <NavBar />
         </header>
-        <Route exact path="/" component={Landing}  />
+        <Route exact path="/" component={ArticleList}  />
         <Route exact path="/:topicSlug" component={ArticleList} />
         <Route exact path="/articles/:article_id" component={ArticleView} />
         <Route exact path="/users/:username" component={UserArticles} />

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import FindUsername from './FindUsername';
 import VoteUpDownButtons from './VoteUpDownButtons';
 import Error from "./Error"
-import {getAllTopics, getArticlesByTopic} from './Api'
+import { getAllTopics, getArticlesByTopic, getAllArticles } from './Api'
 
 import "./ArticleList.css"
 
@@ -18,57 +18,25 @@ class ArticleList extends Component {
     };
     componentDidMount() {
         const { topicSlug } = this.props.match.params
-        getAllTopics()
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                } else {
-                    throw res;
-                }
-            })
-            .then(topics => {
-                let [topic] = topics.topics.filter(topic => topic.slug === topicSlug)
-                this.setState({
-                    topic_id: topic._id
-                })
-                return getArticlesByTopic(this.state.topic_id)
-            })
-            .then(res => {
-                return res.json()
-            })
-            .then(articles => {
-                this.setState({
-                    articles: articles,
-                    loading: false
-                })
-            })
-            .catch(err => {
-                console.log(err)
-                this.setState({
-                    error: true,
-                    loading: false,
-                    errorStatus: err.status,
-                    errorType: err.statusText
-                })
-            })
-    }
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props !== prevProps && prevState === this.state) {
-            const { topicSlug } = this.props.match.params
+        if (topicSlug) {
             getAllTopics()
                 .then(res => {
-                    return res.json()
+                    if (res.ok) {
+                        return res.json()
+                    } else {
+                        throw res;
+                    }
                 })
                 .then(topics => {
                     let [topic] = topics.topics.filter(topic => topic.slug === topicSlug)
-                    this.setState({
-                        topic_id: topic._id
-                    })
-                    //is this really nececerry? does it not just work as a link?
-                    return getArticlesByTopic(this.state.topic_id)
+                    return getArticlesByTopic(topic._id)
                 })
                 .then(res => {
-                    return res.json()
+                    if (res.ok) {
+                        return res.json()
+                    } else {
+                        throw res;
+                    }
                 })
                 .then(articles => {
                     this.setState({
@@ -76,8 +44,108 @@ class ArticleList extends Component {
                         loading: false
                     })
                 })
+                .catch(err => {
+                    console.log(err)
+                    this.setState({
+                        error: true,
+                        loading: false,
+                        errorStatus: err.status,
+                        errorType: err.statusText
+                    })
+                })
         }
-
+        else {
+            getAllArticles()
+                .then(res => {
+                    if (res.ok) {
+                        return res.json()
+                    } else {
+                        throw res;
+                    }
+                })
+                .then(articles => {
+                    this.setState({
+                        articles: articles,
+                        loading: false
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
+                    this.setState({
+                        error: true,
+                        loading: false,
+                        errorStatus: err.status,
+                        errorType: err.statusText
+                    })
+                })
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props !== prevProps && prevState === this.state) {
+            const { topicSlug } = this.props.match.params
+            if (topicSlug) {
+                getAllTopics()
+                    .then(res => {
+                        if (res.ok) {
+                            return res.json()
+                        } else {
+                            throw res;
+                        }
+                    })
+                    .then(topics => {
+                        let [topic] = topics.topics.filter(topic => topic.slug === topicSlug)
+                        //is this really nececerry? does it not just work as a link?
+                        //doesnt just work as a link, should it?
+                        return getArticlesByTopic(topic._id)
+                    })
+                    .then(res => {
+                        if (res.ok) {
+                            return res.json()
+                        } else {
+                            throw res;
+                        }
+                    })
+                    .then(articles => {
+                        this.setState({
+                            articles: articles,
+                            loading: false
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        this.setState({
+                            error: true,
+                            loading: false,
+                            errorStatus: err.status,
+                            errorType: err.statusText
+                        })
+                    })
+            } else {
+                getAllArticles()
+                    .then(res => {
+                        if (res.ok) {
+                            return res.json()
+                        } else {
+                            throw res;
+                        }
+                    })
+                    .then(articles => {
+                        this.setState({
+                            articles: articles,
+                            loading: false
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        this.setState({
+                            error: true,
+                            loading: false,
+                            errorStatus: err.status,
+                            errorType: err.statusText
+                        })
+                    })
+            }
+        }
     }
     render() {
         const { loading, articles, error, errorStatus, errorType } = this.state
@@ -142,8 +210,8 @@ class ArticleList extends Component {
                                     })
                             }
                         </div>
-                    }
-                </div>
+                }
+            </div>
         );
     }
 }
