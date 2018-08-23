@@ -4,14 +4,15 @@ import FindUsername from './FindUsername';
 import VoteUpDownButtons from './VoteUpDownButtons';
 import Error from "./Error"
 import { getAllTopics, getArticlesByTopic, getAllArticles } from './Api'
+import {hottest} from './Utils'
 
 import "./ArticleList.css"
 
 class ArticleList extends Component {
     state = {
-        articles: null,
+        articles: [],
         loading: true,
-        topic_id: null,
+        topic_id: '',
         error: false,
         errorStatus: 0,
         errorType: ''
@@ -149,23 +150,14 @@ class ArticleList extends Component {
     }
     render() {
         const { loading, articles, error, errorStatus, errorType } = this.state
-        let hottest = function (a, b) {
-            if (a.comment_count > b.comment_count) {
-                return -1
-            }
-            if (a.comment_count < b.comment_count) {
-                return 1
-            }
-            return 0
-        }
+        let sorted = articles ? articles.sort(hottest) : []
         return (
             <div>
                 {
                     error ? <Error errorStatus={errorStatus} errorType={errorType} /> :
                         <div className="articleBackground">
                             {
-                                loading ? <p>Loading...</p> : articles
-                                    .sort(hottest)
+                                loading ? <p>Loading...</p> : sorted
                                     .map(article => {
                                         return (
                                             <div key={article._id} className="row ">

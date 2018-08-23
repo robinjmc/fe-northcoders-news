@@ -36,10 +36,11 @@ export const postArticle = (topicId, title, body, userId) => {
     })
 
 }
-export const postComment = (articleId, body) => { //need to implement a check to see if user is logged in 
+export const postComment = (articleId, comment, user) => { //need to implement a check to see if user is logged in 
+    let body = user ? {comment: comment, user: user} : {comment: comment}
     return fetch (`${baseURL}/articles/${articleId}/comments`, {
         method: 'post',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
           'content-type': 'application/json'
         }

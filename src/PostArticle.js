@@ -73,17 +73,6 @@ class PostArticle extends Component {
         article.preventDefault();
         const userId = localStorage.getItem("loggedId");
         const { topicChoice } = this.state;
-        // fetch(`https://robin-pt-nc-news.herokuapp.com/api/topics/${topicChoice}/articles`, {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         title: article.target.elements['articleTitle'].value,
-        //         body: article.target.elements['articleContent'].value,
-        //         user: userId
-        //     }),
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     }
-        // })
         postArticle(topicChoice, article.target.elements['articleTitle'].value, article.target.elements['articleContent'].value, userId)
             .then(res => {
                 return res.json()
