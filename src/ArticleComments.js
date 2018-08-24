@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FindUsername from './FindUsername'
 import VoteUpDownButtons from './VoteUpDownButtons'
 import {getAllCommentsByArticle} from './Api'
+import {mostRecent} from './Utils'
 
 class ArticleComments extends Component {
     state = {
@@ -38,15 +39,6 @@ class ArticleComments extends Component {
 
     render() {
         const { loading, comments } = this.state;
-        let mostRecent = function (a, b) {
-            if (a.created_at > b.created_at) {
-                return -1
-            }
-            if (a.created_at < b.created_at) {
-                return 1
-            }
-            return 0
-        }
         return (
             <div className="articleBackground">
                 {
