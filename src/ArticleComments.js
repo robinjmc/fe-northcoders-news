@@ -39,13 +39,15 @@ class ArticleComments extends Component {
 
     render() {
         const { loading, comments } = this.state;
+
+        let sorted = comments.length ? comments.concat().sort(mostRecent) : []
         return (
             <div className="articleBackground">
                 {
                     loading ? <p>Loading...</p> :
                     comments.length > 0 ?
                         <div>{
-                        comments.sort(mostRecent).map(comment => {
+                        sorted.map(comment => {
                             return (
                                 <div key={comment._id} className="row">
                                     <div className="col-3" >

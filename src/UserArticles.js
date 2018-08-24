@@ -9,7 +9,7 @@ import { getAllArticles, getAllUsers } from "./Api"
 
 class UserArticles extends Component {
     state = {
-        articles: null,
+        articles: [],
         loading: true,
         user: null,
         userId: '',
@@ -57,16 +57,14 @@ class UserArticles extends Component {
     }
     render() {
         const { loading, articles, userId, error, errorStatus, errorType } = this.state;
+        let filtered = articles.length ? articles.concat().filter(article => article.created_by === userId) : []
         return (
             <div>
                 {
                     error ? <Error errorStatus={errorStatus} errorType={errorType} /> :
                         <div className="articleBackground">
                             {
-                                loading ? <p>Loading...</p> : articles.filter(article => {
-                                    return article.created_by === userId
-                                })
-                                    .map(article => {
+                                loading ? <p>Loading...</p> : filtered.map(article => {
                                         return (
                                             <div key={article._id} className="row">
                                                 <div className="col" >

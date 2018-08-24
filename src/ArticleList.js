@@ -150,7 +150,7 @@ class ArticleList extends Component {
     }
     render() {
         const { loading, articles, error, errorStatus, errorType } = this.state
-        let sorted = articles ? articles.sort(hottest) : []
+        let sorted = articles.length ? articles.concat().sort(hottest) : []
         return (
             <div>
                 {
