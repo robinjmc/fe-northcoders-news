@@ -10,7 +10,7 @@ class ArticleView extends Component {
   state = {
     article: null,
     loading: true,
-    commentStatus: "",
+    newComment: {},
     error: false,
     errorStatus: 0,
     errorType: ''
@@ -53,24 +53,24 @@ class ArticleView extends Component {
         return res.json()
       })
       .then(body => {
-        console.log(body)
+        console.log(body) //use this to update comments
         this.setState({
-          commentStatus: 'posted'
+          newComment: body
         })
       })
   }
 
-  refreshComplete = (status) => {
-    if (status === this.state.commentStatus) {
+  refreshComplete = (comment) => {
+    if(Object.entries(comment).length){
       this.setState({
-        commentStatus: ""
+        newComment: {}
       })
     }
   }
 
   render() {
     const { article_id } = this.props.match.params
-    const { loading, article, error, errorStatus, errorType } = this.state;
+    const { loading, article, error, errorStatus, errorType, newComment } = this.state;
     return (
       <div className="articleBackground">
         {loading ? <p>Loading...</p> :
@@ -79,9 +79,7 @@ class ArticleView extends Component {
               error ? <Error errorStatus={errorStatus} errorType={errorType} /> :
                 <div>
                   <div className="row">
-                    {/* <div className="col-1" >
-              <p></p>
-                                    </div> */}
+                    {/* <div className="col-1" ><p></p></div> */}
                     <div className="col-10 col-md-3"><FindUsername userId={article.created_by} /></div>
                     <div className="col-lg" style={{ padding: "70px 0" }}>
                       <div className="row articleCard" style={{ padding: "30px 0", width: "100%", margin: "auto" }}>
@@ -105,7 +103,7 @@ class ArticleView extends Component {
               error ? <div></div> :
                 <div>
                   <CommentBox postComment={this.postComment} />
-                  <ArticleComments article_id={article_id} commentStatus={this.state.commentStatus} refreshComplete={this.refreshComplete} />
+                  <ArticleComments article_id={article_id} /*commentStatus={this.state.commentStatus}*/ refreshComplete={this.refreshComplete} newComment={newComment}/>
                 </div>
             }
           </div>

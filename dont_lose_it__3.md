@@ -86,7 +86,7 @@ can become
 
 ## ArticleView.js
 
-- postcomment doesn't get passed a comment it gets passed an event which has event.target => instead in comment box make a local method handle submit which is called on submit then *that* function does the event prevent default and passes calls postcomment from props with state.comment otherwise there's little point in putting it in state
+- postcomment doesn't get passed a comment it gets passed an event which has event.target => instead in comment box make a local method handle submit which is called on submit then *that* function does the event prevent default and passes calls postcomment from props with state.comment otherwise there's little point in putting it in state 
 - commented out code
 - in postcomment you should recieve back the new comment and manually add it to the list of comments for that article for articleComments to render... you don't want to make extra calls to your BE when you've already got the information you need (and as far as UX goes imagine that it was a big site and had lots of users, your one comment would cause a fetch of potentially hundreds of new comments which would drown out your new one) => will simplify articlecomments as you shant need class based one anymore as it wont be fetching just rendering what its passed from articleview
 - again sort mutates so abstract from render and make shallow copy

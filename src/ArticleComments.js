@@ -16,6 +16,7 @@ class ArticleComments extends Component {
                 return res.json()
             })
             .then(comments => {
+                console.log(comments)
                 this.setState({
                     comments: comments,
                     loading: false
@@ -25,22 +26,13 @@ class ArticleComments extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { article_id, commentStatus, refreshComplete } = this.props
-        if (prevProps !== this.props && commentStatus === 'posted') {
-            getAllCommentsByArticle(article_id)
-                .then(res => {
-                    return res.json()
-                })
-                .then(comments => {
-                    console.log(comments)
-                    //const {comments} = this.state
-                    this.setState({
-                        comments: comments,
-                        loading: false
-                    })
-                    refreshComplete('posted')
-                })
-                .catch(console.log)
+        const { refreshComplete, newComment } = this.props
+        const { comments } = this.state
+        if(prevProps !== this.props && Object.entries(newComment).length){
+            this.setState({
+                comments: [...comments, newComment]
+            })
+            refreshComplete(newComment)
         }
     }
 
