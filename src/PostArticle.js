@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 // import UserArticles from './UserArticles'
 import Error from "./Error";
 import { getAllTopics, postArticle } from "./Api"
@@ -10,6 +11,7 @@ class PostArticle extends Component {
         loading: true,
         topicChoice: '',
         articleStatus: '',
+        newArticle: {},
         error: false,
         errorStatus: 0,
         errorType: ''
@@ -52,16 +54,16 @@ class PostArticle extends Component {
             })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.articleStatus === 'posted') {
-            this.setState({
-                articleContent: '',
-                articleTitle: '',
-                topicChoice: '',
-                articleStatus: ''
-            })
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.state.articleStatus === 'posted') {
+    //         this.setState({
+    //             articleContent: '',
+    //             articleTitle: '',
+    //             topicChoice: '',
+    //             articleStatus: ''
+    //         })
+    //     }
+    // }
 
     chooseTopic = (topic) => {
         this.setState({
@@ -78,17 +80,19 @@ class PostArticle extends Component {
                 return res.json()
             })
             .then(body => {
-                console.log(body)
+                console.log(typeof body)
                 this.setState({
-                    articleStatus: 'posted'
+                    articleStatus: 'posted',
+                    newArticle: body
                 })
+                // return <Link to={`/articles/${body._id}`}></Link> how do i automatically do to this page?
             })
             .catch(console.log)
 
     }
 
     render() {
-        const { articleContent, loading, topics, topicChoice, articleTitle, error, errorStatus, errorType } = this.state;
+        const { articleContent, loading, topics, topicChoice, articleTitle, error, errorStatus, errorType, newArticle } = this.state;
         // const { username } = this.props.match.params;
         console.log(this.props.match)
         let isContent = articleContent.length;
@@ -98,6 +102,9 @@ class PostArticle extends Component {
             <div>
                 {
                     error ? <Error errorStatus={errorStatus} errorType={errorType} /> :
+                    Object.entries(newArticle).length ?
+                    <Link to={`/articles/${newArticle._id}`}>View Article</Link>
+                    :
                         <div>
                             <form onSubmit={this.postArticle}>
                                 <h1> post article </h1>
@@ -119,6 +126,8 @@ class PostArticle extends Component {
                             </form>
                             {/* <UserArticles username={username}/> */}
                         </div>
+                        
+                
                 }
             </div>
         )
