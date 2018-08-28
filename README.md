@@ -13,11 +13,20 @@ download Node by following the installtion steps on their website (https://nodej
 ### Installing
 
 # Npm install
-CD into the project folder and in the command line run npm install or npm i
+CD into the project folder and in the command line run $npm install or $npm i
 
 # Npm start
-To start the development env running locally CD in to the project folder and run in the command line npm start
+To start the development env running locally CD in to the project folder and run in the command line $npm start
 
 ## Deployment
+#Create the Heroku app
+In the command line type heroku create $APP_NAME --buildpack https://github.com/mars/create-react-app-buildpack.git
+Replace '$APP_NAME' with the name for your unique app.
 
-Add additional notes about how to deploy this on a live system
+#Commit and Deploy
+Stage the code to be commited ($git add .)
+Commit the code with a relevant message ($git -m 'Inital Deployment')
+Push the code to the Heroku master branch ($git push heroku master)
+
+#Vist the public site Url in your browser
+In the command line run  $heroku open 
