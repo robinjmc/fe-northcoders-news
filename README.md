@@ -1,4 +1,4 @@
-# Project Title
+# NC NEWS Front End
 Northcoders News is a social news aggregation, web content rating, and discussion website. Articles are posted to a range of Topics, which they can also be filtered by. Via the API Users can voted up or down Articles, as well as post Comments on them. Comments can alsp be up or down voted. 
 
 ## Getting Started
