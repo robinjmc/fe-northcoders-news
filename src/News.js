@@ -49,17 +49,21 @@ class News extends Component {
     }
   }
 
-  logIn = (username) => {
-    username.preventDefault();
-    const userExists = this.state.users.find(user => {
-      return user.username === username.target.elements['username'].value
+  logIn = (username, id) => {
+    // username.preventDefault();
+    // const userExists = this.state.users.find(user => {
+    //   return user.username === username.target.elements['username'].value
+    // })
+    // if (userExists) {
+    //   this.setState({
+    //     username: username.target.elements['username'].value,
+    //     userId: userExists._id
+    //   })
+    // }
+    this.setState({
+      username: username,
+      userId: id
     })
-    if (userExists) {
-      this.setState({
-        username: username.target.elements['username'].value,
-        userId: userExists._id
-      })
-    }
   }
 
   logOut = () => {
@@ -71,7 +75,7 @@ class News extends Component {
   }
 
   render() {
-    let { username } = this.state;
+    let { username, users } = this.state;
     return (
       <div>
         <header>
@@ -93,7 +97,7 @@ class News extends Component {
                   <Link to={`/users/${username}/new_article`}>
                     <h3>join the conversation</h3>
                   </Link>
-                  </div> : <LoginBox logIn={this.logIn} />}
+                  </div> : <LoginBox logIn={this.logIn} users={users}/>}
                 <div>
                 </div>
               </div>

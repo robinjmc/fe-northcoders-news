@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-// import UserArticles from './UserArticles'
 import Error from "./Error";
-import { getAllTopics, postArticle } from "./Api"
+import { getAllTopics, postArticle } from "./Api";
 
 class PostArticle extends Component {
     state = {
