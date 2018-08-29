@@ -69,8 +69,8 @@ class VoteUpDownButtons extends Component {
 
     render() {
         const { UpOrDown, voteCount } = this.state;
-        const up = UpOrDown === 'up' ? true : false;
-        const down = UpOrDown === 'down' ? true : false;
+        const up = UpOrDown === 'up'
+        const down = UpOrDown === 'down'
         const upOn = up ? ["fas fa-thumbs-up fa-2x bg-white up", { color: "green" }] : ["far fa-thumbs-up fa-2x bg-white up", { color: "" }]
         const upDown = down ? ["fas fa-thumbs-down fa-2x bg-white down", { color: "red" }] : ["far fa-thumbs-down fa-2x bg-white down", { color: "" }]
         return (

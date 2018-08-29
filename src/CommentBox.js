@@ -18,12 +18,17 @@ class CommentBox extends Component {
         }
     }
 
+    submit = (event) => {
+        event.preventDefault();
+        this.props.postComment(this.state.comment)
+    }
+
     render() {
         const {comment} = this.state
         let isComment = comment.length;
         return (
             <div>
-                <form onSubmit={this.props.postComment}>
+                <form onSubmit={this.submit}>
                     <h2>comments</h2>
                     <textarea placeholder="What do you think?" name="comment" onChange={this.handleCommentChange} value={comment}/>
                     <button className="btn" type="submit" disabled={isComment === 0 || /\S/.test(comment) === false}>Comment</button>

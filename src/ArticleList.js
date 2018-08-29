@@ -85,7 +85,7 @@ class ArticleList extends Component {
         if (this.props !== prevProps && prevState === this.state) {
             const { topicSlug } = this.props.match.params
             if (topicSlug) {
-                getAllTopics()
+                getAllTopics() //make this in to a function yaaa diggg
                     .then(res => {
                         if (res.ok) {
                             return res.json()
@@ -150,7 +150,7 @@ class ArticleList extends Component {
     }
     render() {
         const { loading, articles, error, errorStatus, errorType } = this.state
-        let sorted = articles.length ? articles.concat().sort(hottest) : []
+        let sorted = articles.length ? [...articles].sort(hottest) : []
         return (
             <div>
                 {
@@ -195,7 +195,6 @@ class ArticleList extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="col" style={{}}>
-                                                    <p></p>
                                                 </div>
                                             </div>
                                         )

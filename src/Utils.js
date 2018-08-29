@@ -4,11 +4,7 @@ export const populateStorage = (username, userId) => {
 }
 
 export const hottest = (a, b) => {
-  if (a.comment_count - b.comment_count > 0 || a.comment_count - b.comment_count < 0) {
-    return a.comment_count - b.comment_count
-  } else {
-    return a.votes - b.votes
-  }
+    return (b.comment_count + b.votes) - (a.comment_count + a.votes)
 }
 
 export const mostRecent = (a, b) => {

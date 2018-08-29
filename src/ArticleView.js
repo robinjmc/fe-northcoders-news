@@ -46,9 +46,9 @@ class ArticleView extends Component {
 
   postComment = (comment) => {
     const { article_id } = this.props.match.params
-    comment.preventDefault();
+    // comment.preventDefault();
     const userId = localStorage.getItem("loggedId") ? localStorage.getItem("loggedId") : null;
-    postComment(article_id, comment.target.elements['comment'].value, userId)
+    postComment(article_id, comment, userId)
       .then(res => {
         return res.json()
       })

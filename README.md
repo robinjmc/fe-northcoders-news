@@ -13,10 +13,10 @@ download Node by following the installtion steps on their website (https://nodej
 ### Installing
 
 # Npm install
-CD into the project folder and in the command line run $npm install or $npm i
+`cd` into the project folder and in the command line run $npm install or $npm i
 
 # Npm start
-To start the development env running locally CD in to the project folder and run in the command line $npm start
+To start the development env running locally `cd` in to the project folder and run in the command line $npm start
 
 ## Deployment
 #Create the Heroku app
