@@ -50,16 +50,6 @@ class News extends Component {
   }
 
   logIn = (username, id) => {
-    // username.preventDefault();
-    // const userExists = this.state.users.find(user => {
-    //   return user.username === username.target.elements['username'].value
-    // })
-    // if (userExists) {
-    //   this.setState({
-    //     username: username.target.elements['username'].value,
-    //     userId: userExists._id
-    //   })
-    // }
     this.setState({
       username: username,
       userId: id
@@ -110,7 +100,6 @@ class News extends Component {
         <Route exact path="/articles/:article_id" component={ArticleView} />
         <Route exact path="/users/:username" component={UserArticles} />
         <Route exact path="/users/:username/new_article" component={PostArticle}/>
-        {/* // component={UserArticles thingIwanttoPass=this.state.users} */}
       </div>
     );
   }
