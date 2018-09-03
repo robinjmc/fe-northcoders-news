@@ -37,7 +37,6 @@ class UserArticles extends Component {
                 return res.json()
             })
             .then(({ users }) => {
-                console.log(users)
                 let user = users.find(user => user.username === username)
                 this.setState({
                     user: user,

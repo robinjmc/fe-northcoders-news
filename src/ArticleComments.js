@@ -17,7 +17,6 @@ class ArticleComments extends Component {
                 return res.json()
             })
             .then(comments => {
-                console.log(comments)
                 this.setState({
                     comments: comments,
                     loading: false
@@ -39,7 +38,6 @@ class ArticleComments extends Component {
 
     render() {
         const { loading, comments } = this.state;
-
         let sorted = comments.length ? comments.concat().sort(mostRecent) : []
         return (
             <div className="articleBackground">
@@ -50,9 +48,7 @@ class ArticleComments extends Component {
                         sorted.map(comment => {
                             return (
                                 <div key={comment._id} className="row">
-                                    <div className="col-3" >
-                                        <p></p>
-                                    </div>
+                                    <div className="col-3" ></div>
                                     <div className="col-12 col-lg-8 " >
                                         <div key={comment._id} className="item" >
                                         <div className="row" style={{ padding: "3px 0" }}></div>

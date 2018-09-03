@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import FindUsername from './FindUsername';
 import VoteUpDownButtons from './VoteUpDownButtons';
 import Error from "./Error"
-import { getAllTopics, getArticlesByTopic, getAllArticles } from './Api'
+import { getArticlesByTopic, getAllArticles } from './Api'
 import {hottest} from './Utils'
 
 import "./ArticleList.css"
@@ -20,18 +20,7 @@ class ArticleList extends Component {
     componentDidMount() {
         const { topicSlug } = this.props.match.params
         if (topicSlug) {
-            getAllTopics()
-                .then(res => {
-                    if (res.ok) {
-                        return res.json()
-                    } else {
-                        throw res;
-                    }
-                })
-                .then(topics => {
-                    let [topic] = topics.topics.filter(topic => topic.slug === topicSlug)
-                    return getArticlesByTopic(topic._id)
-                })
+            getArticlesByTopic(topicSlug)
                 .then(res => {
                     if (res.ok) {
                         return res.json()
@@ -84,21 +73,9 @@ class ArticleList extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.props !== prevProps && prevState === this.state) {
             const { topicSlug } = this.props.match.params
+            // could i do something like this? let getArticles = topicSlug ? getArticlesByTopic(topicSlug) : getAllArticles()
             if (topicSlug) {
-                getAllTopics() //make this in to a function yaaa diggg
-                    .then(res => {
-                        if (res.ok) {
-                            return res.json()
-                        } else {
-                            throw res;
-                        }
-                    })
-                    .then(topics => {
-                        let [topic] = topics.topics.filter(topic => topic.slug === topicSlug)
-                        //is this really nececerry? does it not just work as a link?
-                        //doesnt just work as a link, should it?
-                        return getArticlesByTopic(topic._id)
-                    })
+                getArticlesByTopic(topicSlug)
                     .then(res => {
                         if (res.ok) {
                             return res.json()

@@ -23,7 +23,6 @@ class LoginBox extends Component {
         const {users, logIn} = this.props
         event.preventDefault();
         const user = users.find(user => user.username === username)
-        console.log(user)
         if(user){
             logIn(username, user._id)
         } else {

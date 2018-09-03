@@ -1,5 +1,8 @@
 const baseURL = 'https://robin-pt-nc-news.herokuapp.com/api/'
 
+export const getAllTopics = () => {
+    return fetch (`${baseURL}/topics`)
+}
 export const getAllArticles = () => {
   return fetch (`${baseURL}/articles`)
 }
@@ -7,16 +10,24 @@ export const getArticleById = (slug) => {
     return fetch (`${baseURL}/articles/${slug}`)
 }
 export const getArticlesByTopic = (slug) => {
-  return fetch (`${baseURL}/topics/${slug}/articles`)
+    return getAllTopics()
+    .then(res => {
+        if (res.ok) {
+            return res.json()
+        } else {
+            throw res;
+        }
+    })
+    .then(topics => {
+        const topic = topics.topics.find(topic => topic.slug === slug)
+        return fetch (`${baseURL}/topics/${topic._id}/articles`) 
+    })
 }
 export const getAllUsers = () => {
     return fetch (`${baseURL}/users`)
 }
 export const getUserById = (slug) => {
     return fetch (`${baseURL}/users/${slug}`)
-}
-export const getAllTopics = () => {
-    return fetch (`${baseURL}/topics`)
 }
 export const getAllCommentsByArticle = (slug) => {
     return fetch (`${baseURL}/articles/${slug}/comments`)

@@ -20,7 +20,6 @@ class ErrorPage extends Component {
     render() {
         let {errorStatus} = this.props
         let {errorType, loading} = this.state
-
         return (
             <div>
             {
