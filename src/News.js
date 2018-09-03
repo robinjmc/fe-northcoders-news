@@ -21,7 +21,7 @@ class News extends Component {
     let userIdLocal = localStorage.getItem("loggedId");
     let username = '';
     let userId = '';
-    if (usernameLocal && userIdLocal) {
+    if (usernameLocal && userIdLocal){
       username = usernameLocal
       userId = userIdLocal
     }

@@ -95,7 +95,7 @@ class ArticleView extends Component {
         }
         <Link to="/">return to feed</Link>
         {/* create return to correct topic functionality if possible */}
-        {loading ? <p></p> :
+        {loading ? <div></div> :
           <div>
             {
               error ? <div></div> :

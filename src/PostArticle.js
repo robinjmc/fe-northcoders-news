@@ -71,7 +71,6 @@ class PostArticle extends Component {
                 }
             })
             .then(body => {
-                console.log(typeof body)
                 this.setState({
                     articleStatus: 'posted',
                     newArticle: body

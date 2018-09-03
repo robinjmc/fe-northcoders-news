@@ -15,14 +15,11 @@ class VoteUpDownButtons extends Component {
         })
     }
 
-    vote = (upDown) => {
-        const { value } = upDown.target
+    vote = (event) => {
+        const { value } = event.target
         const { _id, type } = this.props
-        const { UpOrDown, voteCount } = this.state
-        if (value !== UpOrDown) {      
-            // fetch(`https://robin-pt-nc-news.herokuapp.com/api/${type}/${_id}?vote=${value}`, {
-            //     method: 'put'
-            // })
+        const { UpOrDown/*, voteCount*/ } = this.state
+        if (value !== UpOrDown) {
             putVote(type, _id, value)
                 .then(res => {
                     return res.json()
@@ -31,21 +28,21 @@ class VoteUpDownButtons extends Component {
                     this.setState({
                         UpOrDown: value
                     })
-
                 })
-                .catch(body => {
-                    if (UpOrDown === 'up') {
-                        this.setState({
-                            voteCount: voteCount - 1
-                        })
-                    }
-                    else if (UpOrDown === 'down') {
-                        this.setState({
-                            voteCount: voteCount + 1
-                        })
-                    }
-                }
-                )
+                .catch(console.log
+                //     body => {
+                //     if (UpOrDown === 'up') {
+                //         this.setState({
+                //             voteCount: voteCount - 1
+                //         })
+                //     }
+                //     else if (UpOrDown === 'down') {
+                //         this.setState({
+                //             voteCount: voteCount + 1
+                //         })
+                //     }
+                // }
+            )
         }
     }
 
@@ -80,8 +77,6 @@ class VoteUpDownButtons extends Component {
                         <button className={upOn[0]} name="up" style={upOn[1]} value="up" type="button" onClick={this.vote} disabled={up}></button>
                         <h2 style={{ textAlign: "center" }}>{voteCount}</h2>
                         <button className={upDown[0]} name="down" style={upDown[1]} value="down" type="button" onClick={this.vote} disabled={down}></button>
-
-                        {/* </div> */}
                     </div>
                 }
             </div>

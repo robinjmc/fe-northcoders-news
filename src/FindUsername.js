@@ -29,20 +29,18 @@ class FindUsername extends Component {
                 {
                     loading ? <p>Loading...</p> :
                         <div className="row" style={{ textAlign: "center", padding: "60px 0" }}>
-                            <div className="col-10 col-md-2">
-                            </div>
+                            <div className="col-10 col-md-2"></div>
                             <div className="col" style={{ padding: "0px 0", margin: "auto", width: "100%" }}>
-                            <Link to={`/users/${user.username}`}>
-                                <h5>{user.name}</h5>
-                            </Link>
-                            <img className="img-fluid" style={{ 
-                                width: "100%",
-                                objectFit: "cover",
-                                borderRadius: "50%"
-                            }} onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
+                                <Link to={`/users/${user.username}`}>
+                                    <h5>{user.name}</h5>
+                                </Link>
+                                <img className="img-fluid" style={{
+                                    width: "100%",
+                                    objectFit: "cover",
+                                    borderRadius: "50%"
+                                }} onError={addDefaultSrc} alt={user.name} src={user.avatar_url} />
                             </div>
-                            <div className="col-10 col-md-2" >
-                            </div>
+                            <div className="col-10 col-md-2"></div>
                         </div>
                     // doesnt the alt render if the image cant be found?
                 }
