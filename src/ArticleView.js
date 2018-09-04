@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import ArticleComments from "./ArticleComments"
 import FindUsername from "./FindUsername"
-import CommentBox from "./CommentBox"
 import Error from "./Error"
-import {getArticleById, postComment} from "./Api"
+import { getArticleById, postComment } from "./Api"
 
 class ArticleView extends Component {
   state = {
@@ -59,7 +58,7 @@ class ArticleView extends Component {
   }
 
   refreshComplete = (comment) => {
-    if(Object.entries(comment).length){
+    if (Object.entries(comment).length) {
       this.setState({
         newComment: {}
       })
@@ -69,6 +68,7 @@ class ArticleView extends Component {
   render() {
     const { article_id } = this.props.match.params
     const { loading, article, error, errorStatus, errorType, newComment } = this.state;
+    console.log(article)
     return (
       <div className="articleBackground">
         {loading ? <p>Loading...</p> :
@@ -78,7 +78,9 @@ class ArticleView extends Component {
                 <div>
                   <div className="row">
                     {/* <div className="col-1" ><p></p></div> */}
-                    <div className="col-10 col-md-3"><FindUsername userId={article.created_by} /></div>
+                    <div className="col-10 col-md-3">
+                      <FindUsername userId={article.created_by} />
+                    </div>
                     <div className="col-lg" style={{ padding: "70px 0" }}>
                       <div className="row articleCard" style={{ padding: "30px 0", width: "100%", margin: "auto" }}>
                         <h3 style={{ padding: "30px 0", width: "90%", margin: "auto", textAlign: "center" }}>{article.title}</h3>
@@ -93,15 +95,22 @@ class ArticleView extends Component {
                 </div>}
           </div>
         }
-        <Link to="/">return to feed</Link>
+        <div className="row">
+          <div className="col-10 col-md-3">
+            <div className="row " style={{ padding: "0px 0", width: "100%", margin: "auto", justifyContent: "center"}}>
+              <Link to="/"><button className="btn btn-link"> <h5> <nav className="fas fa-arrow-circle-left"></nav> Return to feed</h5></button></Link>
+            </div>
+          </div>
+          <div className="col-lg" style={{ padding: "70px 0" }}></div>
+        </div>
+
         {/* create return to correct topic functionality if possible */}
         {loading ? <div></div> :
           <div>
             {
               error ? <div></div> :
                 <div>
-                  <CommentBox postComment={this.postComment} />
-                  <ArticleComments article_id={article_id} /*commentStatus={this.state.commentStatus}*/ refreshComplete={this.refreshComplete} newComment={newComment}/>
+                  <ArticleComments postComment={this.postComment} article_id={article_id} /*commentStatus={this.state.commentStatus}*/ refreshComplete={this.refreshComplete} newComment={newComment} />
                 </div>
             }
           </div>
