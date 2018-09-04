@@ -90,15 +90,15 @@ class ArticleView extends Component {
                         <p style={{ padding: "30px 0", width: "90%", margin: "auto" }}>{article.body}</p>
                       </div>
                     </div>
-                    <div className="col-12 col-md-1" style={{ padding: "70px 0" }}></div>
+                    <div className="col-12 col-md-1" style={{ padding: "70px 0"}}></div>
                   </div>
                 </div>}
           </div>
         }
         <div className="row">
-          <div className="col-10 col-md-3">
-            <div className="row " style={{ padding: "0px 0", width: "100%", margin: "auto", justifyContent: "center"}}>
-              <Link to="/"><button className="btn btn-link"> <h5> <nav className="fas fa-arrow-circle-left"></nav> Return to feed</h5></button></Link>
+          <div className="col-10 col-md-3" >
+            <div className="row "style={{ padding: "0px 0", width: "100%", margin: "auto", justifyContent: "center"}}>
+              <Link to="/"><button className="btn btn-link" style={{background:"white", padding:"0.5em 0.5em 0 0.5em"}}> <h5> <nav className="fas fa-arrow-circle-left"></nav> Return to feed</h5></button></Link>
             </div>
           </div>
           <div className="col-lg" style={{ padding: "70px 0" }}></div>
