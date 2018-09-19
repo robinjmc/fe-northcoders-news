@@ -24,6 +24,11 @@ class CommentBox extends Component {
                 comment: ''
             })
         }
+        if(prevProps.comments > this.props.comments){
+            this.setState({
+                commentNum: this.state.commentNum - 1
+            })
+        }
     }
 
     submit = (event) => {
