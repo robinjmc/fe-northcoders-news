@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import FindUsername from './FindUsername';
 import VoteUpDownButtons from './VoteUpDownButtons';
 import Error from "./Error"
-import DeletePost from "./DeletePost"
 import { getArticlesByTopic, getAllArticles } from './Api'
 import {hottest} from './Utils'
 
@@ -163,9 +162,6 @@ class ArticleList extends Component {
                                                                 </div>
                                                                 <div style={{ padding: "15px", float: "right", textAlign: "right" }}>
                                                                     <h4>{article.body.slice(0, 60)}...</h4>
-                                                                </div>
-                                                                <div>
-                                                                    <DeletePost userId={article.created_by}/>
                                                                 </div>
                                                             </div>
                                                             <div style={{ margin: "auto", width: "100%", textAlign: "center", padding: "70px 0" }} className="col">

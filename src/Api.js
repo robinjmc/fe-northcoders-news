@@ -63,3 +63,9 @@ export const putVote = (type, id, value) => {
         method: 'put'
     })
 }
+
+export const deletePost = (id, type) => {
+    return fetch(`${baseURL}/${type}/${id}`, {
+        method: 'delete'
+      })
+}

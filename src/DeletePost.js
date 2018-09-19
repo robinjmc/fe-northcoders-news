@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {deletePost} from './Api'
 
 class DeletePost extends Component {
     state = {
@@ -19,31 +20,34 @@ class DeletePost extends Component {
 
     hide = () => {
         const { deleteView } = this.state
-        console.log('hide')
-        // e.preventDefault();
         this.setState({
             deleteView: !deleteView
         })
     }
 
-    deletePost = (e) => {
-
-    }
-    handleClick() {
-        console.log('this is:', this);
+    deletePost = () => {
+        const { postId, deletedComment } = this.props
+        deletePost(postId, 'comments')
+            .then(res => {
+                return res.json()
+            })
+            .then(body => {
+                deletedComment()
+            })
     }
 
     render() {
         let { user, deleteView } = this.state
+        console.log(this.props.postId)
         return (
             <div>
                 {user ?
-                    <div style={{ padding: "10px", margin: "auto", textAlign: "right" }}>
+                    <div>
                         {
                             deleteView ?
-                                <form onSubmit={this.deletePost}>
+                                <form >
                                     <h6><i>Delete Post?</i></h6>
-                                    <button type="submit" className="btn btn-danger">Yes</button>
+                                    <button type="button" className="btn btn-danger" onClick={(e) => this.deletePost(e)}>Yes</button>
                                     <button type="button" className="btn btn-secondary" onClick={(e) => this.hide(e)}>No</button>
                                 </form>
                                 :

@@ -50,13 +50,11 @@ class VoteUpDownButtons extends Component {
         const { voteCount, UpOrDown } = this.state
         if (prevState.UpOrDown !== UpOrDown) {
             if (UpOrDown === 'up') {
-                console.log(voteCount)
                 this.setState({
                     voteCount: voteCount + 1
                 })
             }
             else if (UpOrDown === 'down') {
-                console.log(voteCount)
                 this.setState({
                     voteCount: voteCount - 1
                 })
