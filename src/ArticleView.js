@@ -26,7 +26,6 @@ class ArticleView extends Component {
         }
       })
       .then(article => {
-        console.log(article)
         this.setState({
           article: article,
           loading: false

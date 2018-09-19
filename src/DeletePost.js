@@ -38,7 +38,6 @@ class DeletePost extends Component {
 
     render() {
         let { user, deleteView } = this.state
-        console.log(this.props.postId)
         return (
             <div>
                 {user ?
